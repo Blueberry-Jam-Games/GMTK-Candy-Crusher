@@ -20,13 +20,13 @@ public class TowerAttackScript : BlockingObject
     public GameObject bullet;
     [SerializeField]
     private int maxTargets;
-    private int currTargets = 0;
 
     Dictionary<int, bool> playerTracking;
 
     private void Start()
     {
         playerTracking = new Dictionary<int, bool>();
+        ammo = 5;
     }
 
     private void FixedUpdate()
@@ -50,20 +50,12 @@ public class TowerAttackScript : BlockingObject
         }
     }
 
+    private int ammo;
+
     public void ReloadAmmo(int reloadQty)
     {
-        // TODO
+        ammo += reloadQty;
     }
-
-    // void OnTriggerEnter(Collider collision)
-    // {
-    //     if (collision.gameObject.CompareTag("Soldier") && maxTargets > currTargets)
-    //     {
-    //         Debug.Log("hi");
-    //         collision.gameObject.GetComponent<MediumPlayer>().SetDamage(true);
-    //         currTargets++;
-    //     }
-    // }
 
     void OnTriggerStay(Collider collision)
     {
@@ -78,7 +70,7 @@ public class TowerAttackScript : BlockingObject
             if(playerTracking.ContainsKey(player.id))
             {
                 playerTracking[player.id] = true;
-                if (Time.time > nextFire)
+                if (Time.time > nextFire && ammo > 5)
                 {
                     nextFire = Time.time + fireRate;
                     Projectile rocket = Instantiate(bullet, transform.position, transform.rotation).GetComponent<Projectile>();
@@ -87,26 +79,11 @@ public class TowerAttackScript : BlockingObject
                     Debug.Log("Name: " + collision.gameObject.name + " health: " + player.healthPoints);
                     // do damage
                     player.DoDamage(5f);
-
-                    // if (player.healthPoints <= 0.0f)
-                    // {
-                    //     Debug.Log("destroy is getting called");
-                    //     // currTargets--;
-                    //     Destroy(collision.gameObject);
-                    // }
+                    ammo--;
                 }
             }
         }
     }
-
-    // void OnTriggerExit(Collider collision)
-    // {
-    //     if (collision.gameObject.CompareTag("Soldier"))
-    //     {
-    //         collision.gameObject.GetComponent<MediumPlayer>().SetDamage(false);
-    //         currTargets--;
-    //     }
-    // }
 
     void OnValidate() {
         if (floorCount > 5)
@@ -152,13 +129,21 @@ public class TowerAttackScript : BlockingObject
             Vector3 roofPosition = new Vector3(0, 0.1F + floorCount * segmentHeight);
             roofPosition += basePosition;
 
+            GameObject roof = null;
+
             if (attackState == TowerType.PEPPERMINT)
             {
-                Instantiate(towerPieces.peppermintRoof1x1, roofPosition, forward, this.transform);
+                roof = Instantiate(towerPieces.peppermintRoof1x1, roofPosition, forward, this.transform);
             }
             else if (attackState == TowerType.SPRINKLES)
             {
-                Instantiate(towerPieces.sprinklesRoof1x1, roofPosition, forward, this.transform);
+                roof = Instantiate(towerPieces.sprinklesRoof1x1, roofPosition, forward, this.transform);
+            }
+
+            if(roof != null)
+            {
+                BoxCollider topCollider = roof.AddComponent<BoxCollider>();
+                topCollider.size = Vector3.one;
             }
         }
     }

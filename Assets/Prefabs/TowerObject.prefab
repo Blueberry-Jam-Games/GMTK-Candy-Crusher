@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6223893667729424909}
   m_Layer: 0
   m_Name: TowerObject
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,6 +118,7 @@ MonoBehaviour:
   attackState: 0
   attackMaterials: 0
   floorCount: 1
-  towerPieces: {fileID: 0}
+  towerPieces: {fileID: 11400000, guid: 0eec6b9d9237b794db935455c2ce42fc, type: 2}
   fireRate: 1
   bullet: {fileID: 6590633388225575121, guid: 425de1977c3eb4e2e8eb131ef7019953, type: 3}
+  maxTargets: 0

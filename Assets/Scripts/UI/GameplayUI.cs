@@ -12,18 +12,25 @@ public class GameplayUI : MonoBehaviour
     [Header("Internal Refs")]
     public Button batalion1;
     public TextMeshProUGUI batalionQty1;
+    public Button rocket;
 
     public GameObject mediumPlayer;
+    public GameObject rocketPrefab;
     public GameObject decalRenderer;
 
     public UIState state = UIState.DEFAULT;
 
     private int selectedOption; // 1-3 = Batalion, 4 = rocket
 
+    private GameplayManager gameplayManager;
+
     private void Start()
     {
+        gameplayManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameplayManager>();
         decalRenderer.SetActive(false);
         batalion1.onClick.AddListener(OnBatalion1Press);
+        rocket.onClick.AddListener(OnRocketPressed);
+        UpdateUI();
     }
 
     private void Update()
@@ -39,14 +46,22 @@ public class GameplayUI : MonoBehaviour
                 if(Input.GetMouseButtonDown(0))
                 {
                     Debug.Log("Mouse clicked, do action");
-                    Vector3 tempPos;
-                    tempPos.x = Mathf.Floor(hit.point.x);
-                    tempPos.y = Mathf.Floor(hit.point.y);
-                    tempPos.z = Mathf.Floor(hit.point.z);
-                    if (tempPos.z == 0.0f)
+                    if(selectedOption <= 3)
                     {
-                        DoPlayerAction(tempPos, selectedOption);
+                        Vector3 tempPos;
+                        tempPos.x = Mathf.Floor(hit.point.x);
+                        tempPos.y = Mathf.Floor(hit.point.y);
+                        tempPos.z = Mathf.Floor(hit.point.z);
+                        if (tempPos.z == 0.0f)
+                        {
+                            DoPlayerAction(tempPos, selectedOption);
+                        }
                     }
+                    else if (selectedOption == 4)
+                    {
+                        DoRocketAction(hit.point);
+                    }
+                    
                     state = UIState.DEFAULT;
 
                     decalRenderer.SetActive(false);
@@ -60,6 +75,11 @@ public class GameplayUI : MonoBehaviour
         }
     }
 
+    void UpdateUI()
+    {
+        batalionQty1.text = gameplayManager.batalionCounts[0].ToString();
+    }
+
     public void OnBatalion1Press()
     {
         OnBatalionButtonPressed(1);
@@ -67,17 +87,51 @@ public class GameplayUI : MonoBehaviour
 
     private void OnBatalionButtonPressed(int batalion)
     {
-        if (state == UIState.DEFAULT)
+        if (state == UIState.DEFAULT && gameplayManager.batalionCounts[batalion - 1] != 0)
         {
             state = UIState.SELECTION;
             selectedOption = batalion;
             decalRenderer.SetActive(true);
+            gameplayManager.batalionCounts[batalion - 1]--;
         }
+    }
+
+    private void OnRocketPressed()
+    {
+        Debug.Log("Rocket start");
+        if(state == UIState.DEFAULT)
+        {
+            Debug.Log("Default State");
+            if(gameplayManager.availableRockets > 0)
+            {
+                Debug.Log("rocket select mode");
+                selectedOption = 4;
+                state = UIState.SELECTION;
+                decalRenderer.SetActive(true);
+            }
+        }
+    }
+
+    private void DoRocketAction(Vector3 target)
+    {
+        Debug.Log("Do player action rocket");
+        DoRocket(target);
     }
 
     private void DoPlayerAction(Vector3 target, int type)
     {
+
         StartCoroutine(SpawnBattalion(target, type));
+        UpdateUI();
+    }
+
+    private void DoRocket(Vector3 where)
+    {
+        Debug.Log("DoRocket");
+        GameObject spawnedRocket = GameObject.Instantiate(rocketPrefab);
+        Rocket rocketCode = spawnedRocket.GetComponent<Rocket>();
+        rocketCode.Init(where);
+        gameplayManager.availableRockets--;
     }
 
     private IEnumerator SpawnBattalion(Vector3 target, int type)
@@ -85,15 +139,15 @@ public class GameplayUI : MonoBehaviour
         int end = 0;
         if(type == 1)
         {
-            end = 20;
+            end = 10;
         }
         else if(type == 2)
         {
-            end = 5;
+            end = 2;
         }
         else if(type == 3)
         {
-            end = 2;
+            end = 1;
         }
         for (int i = 0; i < end; i++)
         {
