@@ -59,6 +59,8 @@ public class TowerGrid : MonoBehaviour
         {
             BlockingObject blocker = blockers[i];
             Debug.Log("Found blocker of size " + blocker.width + ", " + blocker.height);
+            blocker.SnapToGrid();
+            blocker.UpdateGeometry();
             for(int x = 0; x < blocker.width; x++)
             {
                 for(int y = 0; y < blocker.height; y++)
