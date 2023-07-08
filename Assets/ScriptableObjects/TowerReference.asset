@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faafab5969ba2a44eaa7338081ea0c0d, type: 3}
   m_Name: TowerReference
   m_EditorClassIdentifier: 
-  sprinklesRoof1x1: {fileID: 0}
+  sprinklesRoof1x1: {fileID: 919132149155446097, guid: 9850d8b50a01223459604c5a651cac74,
+    type: 3}
   peppermintRoof1x1: {fileID: 919132149155446097, guid: d5dde72aad2deb84293cdc80108a6b9a,
     type: 3}
   laserRoof1x1: {fileID: 0}
@@ -26,5 +27,8 @@ MonoBehaviour:
   segment1x1: {fileID: 919132149155446097, guid: 61e91eda856b1e24e90473268203991a,
     type: 3}
   segment2x2: {fileID: 0}
-  siding1x1: []
+  siding1x1:
+  - {fileID: 919132149155446097, guid: e04032fd043dfa0499afee672c45bf3a, type: 3}
+  - {fileID: 919132149155446097, guid: 67f5d82b1f8b5204eba9ef62a8eff579, type: 3}
+  - {fileID: 919132149155446097, guid: 28d5b60182db6084e8c19e2c1e68e5c3, type: 3}
   siding2x2: []
