@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class TowerGrid : MonoBehaviour
 {
-    int exitx = 0;
-    int exity = 0;
+    [SerializeField]
+    private int exitx;
+    [SerializeField]
+    public int exity;
 
     public int width;
     public int height;
@@ -13,18 +15,6 @@ public class TowerGrid : MonoBehaviour
     public float terrainHeightThreshold = 0.5f;
 
     public Array2D<int> grid;
-
-    // public List<List<int>> grid = new List<List<int>> {
-    //     new List<int>{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //     new List<int>{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //     new List<int>{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //     new List<int>{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //     new List<int>{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //     new List<int>{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //     new List<int>{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //     new List<int>{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    //     new List<int>{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-    // };
 
     List<List<int>> directions = new List<List<int>> {
         new List<int>{0, 1},
@@ -57,6 +47,11 @@ public class TowerGrid : MonoBehaviour
             grid.ForEach((x, y, t) => 0);
         }
 
+        ExitObject exitObject = GameObject.FindObjectOfType<ExitObject>();
+        exitx = exitObject.GetX();
+        exity = exitObject.GetZ();
+        Debug.Log("exitx " + exitx + " exity " + exity);
+        
         // Apply blocking objects
         BlockingObject[] blockers = GameObject.FindObjectsOfType<BlockingObject>();
         Debug.Log("Found " + blockers.Length + " blockers");
@@ -94,24 +89,13 @@ public class TowerGrid : MonoBehaviour
         }
     }
 
-    List<int> NextPos(int startRow, int startCol)
+    public List<int> NextPos(int startRow, int startCol)
     {
         int n = grid.width;
         int m = grid.height;
+        //Debug.Log("Grid Width" + n);
 
         Array2D<bool> seen = new Array2D<bool>(grid.width, grid.height, false);
-
-        // List<List<bool>> seen = new List<List<bool>>{
-        //     new List<bool>{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
-        //     new List<bool>{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
-        //     new List<bool>{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
-        //     new List<bool>{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
-        //     new List<bool>{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
-        //     new List<bool>{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
-        //     new List<bool>{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
-        //     new List<bool>{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},
-        //     new List<bool>{false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}
-        // };
 
         Queue<List<int>> queue = new Queue<List<int>>();
 
@@ -120,7 +104,7 @@ public class TowerGrid : MonoBehaviour
             int dx = startRow + attempt[0];
             int dy = startCol + attempt[1];
             
-            if (dx >= 0 && dx < n && dy < m && dy >= 0 && !seen.Get(dx, dy) && (grid.Get(dx, dy) != '1'))
+            if (dx >= 0 && dx < n && dy < m && dy >= 0 && !seen.Get(dx, dy) && (grid.Get(dx, dy) != 1))
             {
                 seen.Set(dx, dy, true);
                 queue.Enqueue(new List<int>{dx, dy, dx, dy});
@@ -146,7 +130,7 @@ public class TowerGrid : MonoBehaviour
                 int dx = row + attempt[0];
                 int dy = col + attempt[1];
             
-                if (dx >= 0 && dx < n && dy < m && dy >= 0 && !seen.Get(dx, dy) && (grid.Get(dx, dy) != '1'))
+                if (dx >= 0 && dx < n && dy < m && dy >= 0 && !seen.Get(dx, dy) && (grid.Get(dx, dy) != 1))
                 {
                     seen.Set(dx, dy, true);
                     queue.Enqueue(new List<int>{dx, dy, answerX, answerY});
