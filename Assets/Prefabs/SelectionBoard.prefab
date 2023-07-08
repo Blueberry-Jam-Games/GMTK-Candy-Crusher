@@ -309,6 +309,7 @@ GameObject:
   - component: {fileID: 4394893935269397805}
   - component: {fileID: 4394893935269397804}
   - component: {fileID: 4394893935269397802}
+  - component: {fileID: 7552214136437425798}
   m_Layer: 5
   m_Name: Batalion1
   m_TagString: Untagged
@@ -419,6 +420,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7552214136437425798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4394893935269397806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd62a163044089c4e818a6df6dc94f37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: Send Red Gumballs
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &4394893935417190314
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,6 +522,7 @@ GameObject:
   - component: {fileID: 4394893935686033493}
   - component: {fileID: 4394893935686033491}
   - component: {fileID: 4394893935686033490}
+  - component: {fileID: 1530099172654270528}
   m_Layer: 5
   m_Name: NextWave
   m_TagString: Untagged
@@ -572,6 +588,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1530099172654270528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4394893935686033492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd62a163044089c4e818a6df6dc94f37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: Wait for Reinforcement
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &4394893935787712555
 GameObject:
   m_ObjectHideFlags: 0
@@ -706,7 +736,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 1
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -765,7 +795,6 @@ MonoBehaviour:
   arrowRoot: {x: 0, y: 0, z: 0}
   batalion1: {fileID: 4394893935269397802}
   batalionQty1: {fileID: 6320104767173158089}
-  uiLine: {fileID: 0}
   decalRenderer: {fileID: 0}
   state: 0
 --- !u!1 &4394893935815532158
@@ -779,6 +808,7 @@ GameObject:
   - component: {fileID: 4394893935815532159}
   - component: {fileID: 4394893935815532157}
   - component: {fileID: 4394893935815532156}
+  - component: {fileID: 3951475229401362916}
   m_Layer: 5
   m_Name: Rocket
   m_TagString: Untagged
@@ -844,6 +874,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3951475229401362916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4394893935815532158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd62a163044089c4e818a6df6dc94f37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: Send Rocket
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &4394893935840605722
 GameObject:
   m_ObjectHideFlags: 0
