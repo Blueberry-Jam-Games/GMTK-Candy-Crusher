@@ -8,9 +8,9 @@ TerrainLayer:
   m_PrefabAsset: {fileID: 0}
   m_Name: CandyTerrainLayer
   m_DiffuseTexture: {fileID: 2800000, guid: a31f5dbfeec34b1428c4e83256fc3cda, type: 3}
-  m_NormalMapTexture: {fileID: 0}
-  m_MaskMapTexture: {fileID: 0}
-  m_TileSize: {x: 2, y: 2}
+  m_NormalMapTexture: {fileID: 2800000, guid: d81e7b95cc3161742a2e405b2e02b7be, type: 3}
+  m_MaskMapTexture: {fileID: 2800000, guid: 88d9fad5311a49d4399d5347327a794d, type: 3}
+  m_TileSize: {x: 4, y: 4}
   m_TileOffset: {x: 0, y: 0}
   m_Specular: {r: 0, g: 0, b: 0, a: 0}
   m_Metallic: 0
