@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faafab5969ba2a44eaa7338081ea0c0d, type: 3}
+  m_Name: TowerReference
+  m_EditorClassIdentifier: 
+  sprinklesRoof1x1: {fileID: 0}
+  peppermintRoof1x1: {fileID: 919132149155446097, guid: d5dde72aad2deb84293cdc80108a6b9a,
+    type: 3}
+  laserRoof1x1: {fileID: 0}
+  frostingRoof1x1: {fileID: 0}
+  sprinklesRoof2x2: {fileID: 0}
+  peppermintRoof2x2: {fileID: 0}
+  laserRoof2x2: {fileID: 0}
+  frostingRoof2x2: {fileID: 0}
+  base1x1: {fileID: 919132149155446097, guid: 812ca9a81e6dec64692f8472c962935d, type: 3}
+  base2x2: {fileID: 0}
+  segment1x1: {fileID: 919132149155446097, guid: 61e91eda856b1e24e90473268203991a,
+    type: 3}
+  segment2x2: {fileID: 0}
+  siding1x1: []
+  siding2x2: []
