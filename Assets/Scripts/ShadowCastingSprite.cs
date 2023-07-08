@@ -25,10 +25,21 @@ public class ShadowCastingSprite : MonoBehaviour
             if(targetRenderer == null)
             {
                 targetRenderer = GetComponent<SpriteRenderer>();
-                targetRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.TwoSided;
-                targetRenderer.receiveShadows = true;
-
-                EditorUtility.SetDirty(this.gameObject);
+                bool needSave = false;
+                if(targetRenderer.shadowCastingMode != UnityEngine.Rendering.ShadowCastingMode.TwoSided)
+                {
+                    targetRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.TwoSided;
+                    needSave = true;
+                }
+                if(targetRenderer.receiveShadows != true)
+                {
+                    targetRenderer.receiveShadows = true;
+                    needSave = true;
+                }
+                if(needSave)
+                {
+                    EditorUtility.SetDirty(this.gameObject);
+                }
             }
         }
     }

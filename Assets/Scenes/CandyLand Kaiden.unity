@@ -161,6 +161,7 @@ MonoBehaviour:
   height: 2
   xOffset: -0.5
   zOffset: -0.5
+  lockToGrid: 0
 --- !u!65 &251675446
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -483,11 +484,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4394893935804350865, guid: d9a7598645ae4394fbe6147402ed9e39,
-        type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4394893935804350866, guid: d9a7598645ae4394fbe6147402ed9e39,
         type: 3}
@@ -819,6 +815,7 @@ MonoBehaviour:
   height: 1
   xOffset: 0
   zOffset: 0
+  lockToGrid: 0
 --- !u!65 &1109963744
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1048,6 +1045,7 @@ MonoBehaviour:
   height: 1
   xOffset: 0
   zOffset: 0
+  lockToGrid: 0
 --- !u!65 &1497565270
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1524,6 +1522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerGrid: {fileID: 2016926174}
+  state: 0
 --- !u!1 &2016926172
 GameObject:
   m_ObjectHideFlags: 0
