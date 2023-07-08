@@ -22,47 +22,91 @@ public class TowerAttackScript : BlockingObject
     private int maxTargets;
     private int currTargets = 0;
 
+    Dictionary<int, bool> playerTracking;
+
+    private void Start()
+    {
+        playerTracking = new Dictionary<int, bool>();
+    }
+
+    private void FixedUpdate()
+    {
+        List<int> destroyList = new List<int>();
+        List<int> inventoryList = new List<int>(playerTracking.Keys);
+        foreach(int key in inventoryList)
+        {
+            if(playerTracking[key])
+            {
+               playerTracking[key] = false; 
+            }
+            else
+            {
+                destroyList.Add(key);
+            }
+        }
+        foreach(int i in destroyList)
+        {
+            playerTracking.Remove(i);
+        }
+    }
+
     public void ReloadAmmo(int reloadQty)
     {
         // TODO
     }
 
-    void OnTriggerEnter(Collider collision)
-    {
-        if (collision.gameObject.CompareTag("Soldier") && maxTargets > currTargets)
-        {
-            Debug.Log("hi");
-            collision.gameObject.GetComponent<MediumPlayer>().SetDamage(true);
-            currTargets++;
-        }
-    }
+    // void OnTriggerEnter(Collider collision)
+    // {
+    //     if (collision.gameObject.CompareTag("Soldier") && maxTargets > currTargets)
+    //     {
+    //         Debug.Log("hi");
+    //         collision.gameObject.GetComponent<MediumPlayer>().SetDamage(true);
+    //         currTargets++;
+    //     }
+    // }
 
     void OnTriggerStay(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Soldier") && Time.time > nextFire)
+        if (collision.gameObject.CompareTag("Soldier"))
         {
-            nextFire = Time.time + fireRate;
-            Projectile rocket = Instantiate(bullet, transform.position, transform.rotation).GetComponent<Projectile>();
-
-            rocket.velocity = collision.transform.position - transform.position;
-            Debug.Log("Name: " + collision.gameObject.name + " health: " + collision.gameObject.GetComponent<MediumPlayer>().healthPoints);
-            if (collision.gameObject.GetComponent<MediumPlayer>().healthPoints <= 0.0f)
+            MediumPlayer player = collision.gameObject.GetComponent<MediumPlayer>();
+            if(!playerTracking.ContainsKey(player.id) && playerTracking.Count < maxTargets)
             {
-                Debug.Log("destroy is getting called");
-                currTargets--;
-                Destroy(collision.gameObject);
+                playerTracking.Add(player.id, true);
+            }
+
+            if(playerTracking.ContainsKey(player.id))
+            {
+                playerTracking[player.id] = true;
+                if (Time.time > nextFire)
+                {
+                    nextFire = Time.time + fireRate;
+                    Projectile rocket = Instantiate(bullet, transform.position, transform.rotation).GetComponent<Projectile>();
+
+                    rocket.velocity = collision.transform.position - transform.position;
+                    Debug.Log("Name: " + collision.gameObject.name + " health: " + player.healthPoints);
+                    // do damage
+                    player.DoDamage(5f);
+
+                    // if (player.healthPoints <= 0.0f)
+                    // {
+                    //     Debug.Log("destroy is getting called");
+                    //     // currTargets--;
+                    //     Destroy(collision.gameObject);
+                    // }
+                }
             }
         }
     }
 
-    void OnTriggerExit(Collider collision)
-    {
-        if (collision.gameObject.CompareTag("Soldier"))
-        {
-            collision.gameObject.GetComponent<MediumPlayer>().SetDamage(false);
-            currTargets--;
-        }
-    }
+    // void OnTriggerExit(Collider collision)
+    // {
+    //     if (collision.gameObject.CompareTag("Soldier"))
+    //     {
+    //         collision.gameObject.GetComponent<MediumPlayer>().SetDamage(false);
+    //         currTargets--;
+    //     }
+    // }
 
     void OnValidate() {
         if (floorCount > 3)

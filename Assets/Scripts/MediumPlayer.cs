@@ -11,12 +11,16 @@ public class MediumPlayer : MonoBehaviour
 
     private TowerGrid towerGrid;
 
-    bool damage = false;
     [SerializeField]
     public PlayerType state;
+
     [SerializeField]
     public float healthPoints;
-    // Start is called before the first frame update
+
+    public int id;
+
+    public static int GLOBAL_ID = 0;
+
     void Start()
     {
         towerGrid = GameObject.FindGameObjectWithTag("TowerGrid").GetComponent<TowerGrid>();
@@ -43,27 +47,12 @@ public class MediumPlayer : MonoBehaviour
         {
             modifier = 0.05f;
         }
+
+        this.id = GLOBAL_ID++;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        if (damage)
-        {
-            if (state == PlayerType.LARGE)
-            {
-                healthPoints -= 0.02f;
-            }
-            else if (state == PlayerType.MEDIUM)
-            {
-                healthPoints -= 0.05f;
-            }
-            else
-            {
-                healthPoints -= 0.1f;
-            }
-            Debug.Log("Health Points: " + healthPoints);
-        }
         //Debug.Log("transform.position.x: " + transform.position.x + "targetPosition.x: " + targetPosition.x + "transform.position.z: " + transform.position.z + "targetPosition.y: " + targetPosition.y);
         if (0.02f > Math.Abs(targetPosition.x - transform.position.x) && 0.02f > Math.Abs(targetPosition.y - transform.position.z))
         {
@@ -97,14 +86,13 @@ public class MediumPlayer : MonoBehaviour
         transform.position = tempPos;
     }
 
-    public void SetDamage(bool val)
+    public void DoDamage(float ammount)
     {
-        damage = val;
-    }
-
-    public bool GetDamage()
-    {
-        return damage;
+        healthPoints -= ammount;
+        if(healthPoints <= 0f)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
 
