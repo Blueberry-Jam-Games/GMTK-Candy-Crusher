@@ -43,6 +43,7 @@ public class BuildScript
         else if (report.summary.result == BuildResult.Failed)
         {
             Debug.LogError($"Build failed");
+            EditorApplication.Exit(1);
         }
     }
 
