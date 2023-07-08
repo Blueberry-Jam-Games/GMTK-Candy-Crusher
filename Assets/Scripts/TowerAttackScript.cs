@@ -18,11 +18,22 @@ public class TowerAttackScript : BlockingObject
 
     [SerializeField]
     public GameObject bullet;
+    [SerializeField]
+    private int maxTargets;
+    private int currTargets = 0;
+
+    public void ReloadAmmo(int reloadQty)
+    {
+        // TODO
+    }
+
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Soldier"))
+        if (collision.gameObject.CompareTag("Soldier") && maxTargets > currTargets)
         {
+            Debug.Log("hi");
             collision.gameObject.GetComponent<MediumPlayer>().SetDamage(true);
+            currTargets++;
         }
     }
 
@@ -34,6 +45,13 @@ public class TowerAttackScript : BlockingObject
             Projectile rocket = Instantiate(bullet, transform.position, transform.rotation).GetComponent<Projectile>();
 
             rocket.velocity = collision.transform.position - transform.position;
+            Debug.Log("Name: " + collision.gameObject.name + " health: " + collision.gameObject.GetComponent<MediumPlayer>().healthPoints);
+            if (collision.gameObject.GetComponent<MediumPlayer>().healthPoints <= 0.0f)
+            {
+                Debug.Log("destroy is getting called");
+                currTargets--;
+                Destroy(collision.gameObject);
+            }
         }
     }
 
@@ -42,6 +60,7 @@ public class TowerAttackScript : BlockingObject
         if (collision.gameObject.CompareTag("Soldier"))
         {
             collision.gameObject.GetComponent<MediumPlayer>().SetDamage(false);
+            currTargets--;
         }
     }
 

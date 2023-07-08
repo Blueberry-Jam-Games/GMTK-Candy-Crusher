@@ -9,16 +9,18 @@ public class MediumPlayer : MonoBehaviour
     Vector2 targetPosition;
     Vector2 direction;
 
-    public TowerGrid towerGrid;
+    private TowerGrid towerGrid;
 
     bool damage = false;
     [SerializeField]
-    private PlayerType state;
+    public PlayerType state;
     [SerializeField]
-    private float healthPoints = 100.0f;
+    public float healthPoints;
     // Start is called before the first frame update
     void Start()
     {
+        towerGrid = GameObject.FindGameObjectWithTag("TowerGrid").GetComponent<TowerGrid>();
+        
         Vector3 tempPos;
         tempPos.x = (int)transform.position.x;
         tempPos.y = transform.position.y;
@@ -60,10 +62,7 @@ public class MediumPlayer : MonoBehaviour
             {
                 healthPoints -= 0.1f;
             }
-        }
-        if (0.0f >= healthPoints)
-        {
-            Destroy(gameObject);
+            Debug.Log("Health Points: " + healthPoints);
         }
         //Debug.Log("transform.position.x: " + transform.position.x + "targetPosition.x: " + targetPosition.x + "transform.position.z: " + transform.position.z + "targetPosition.y: " + targetPosition.y);
         if (0.02f > Math.Abs(targetPosition.x - transform.position.x) && 0.02f > Math.Abs(targetPosition.y - transform.position.z))
