@@ -2,21 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TowerAttackScript : MonoBehaviour
+public class TowerAttackScript : BlockingObject
 {
     [SerializeField]
     public TowerType attackState;
     [SerializeField]
     public TowerMaterials attackMaterials;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
+    void OnCollisionStay(Collision collisionInfo)
     {
         
     }
