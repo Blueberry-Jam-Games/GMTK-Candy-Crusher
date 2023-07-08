@@ -14,6 +14,7 @@ public class MediumPlayer : MonoBehaviour
     bool damage = false;
     [SerializeField]
     private PlayerType state;
+    [SerializeField]
     private float healthPoints = 100.0f;
     // Start is called before the first frame update
     void Start()
@@ -59,6 +60,10 @@ public class MediumPlayer : MonoBehaviour
             {
                 healthPoints -= 0.1f;
             }
+        }
+        if (0.0f >= healthPoints)
+        {
+            Destroy(gameObject);
         }
         //Debug.Log("transform.position.x: " + transform.position.x + "targetPosition.x: " + targetPosition.x + "transform.position.z: " + transform.position.z + "targetPosition.y: " + targetPosition.y);
         if (0.02f > Math.Abs(targetPosition.x - transform.position.x) && 0.02f > Math.Abs(targetPosition.y - transform.position.z))

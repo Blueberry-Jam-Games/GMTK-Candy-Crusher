@@ -159,6 +159,7 @@ MonoBehaviour:
   height: 2
   xOffset: -0.5
   zOffset: -0.5
+  lockToGrid: 0
 --- !u!65 &251675446
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -417,8 +418,12 @@ MonoBehaviour:
   height: 2
   xOffset: -0.5
   zOffset: -0.5
+  lockToGrid: 0
   attackState: 0
   attackMaterials: 0
+  floorCount: 1
+  towerPieces: {fileID: 0}
+  fireRate: 1
   bullet: {fileID: 6590633388225575121, guid: 425de1977c3eb4e2e8eb131ef7019953, type: 3}
 --- !u!65 &395137983
 BoxCollider:
@@ -673,6 +678,7 @@ MonoBehaviour:
   height: 1
   xOffset: 0
   zOffset: 0
+  lockToGrid: 0
 --- !u!65 &1109963744
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1130,6 +1136,7 @@ MonoBehaviour:
   height: 1
   xOffset: 0
   zOffset: 0
+  lockToGrid: 0
 --- !u!65 &1497565270
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1552,7 +1559,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerGrid: {fileID: 2016926174}
-  state: 1
+  state: 0
+  healthPoints: 15
 --- !u!54 &1944535645
 Rigidbody:
   m_ObjectHideFlags: 0

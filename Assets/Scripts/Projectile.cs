@@ -21,4 +21,12 @@ public class Projectile : MonoBehaviour
 
         transform.position = tempPos;
     }
+
+    void OnTriggerExit(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("Soldier"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }
