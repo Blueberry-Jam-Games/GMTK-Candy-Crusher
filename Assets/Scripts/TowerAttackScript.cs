@@ -46,9 +46,9 @@ public class TowerAttackScript : BlockingObject
     }
 
     void OnValidate() {
-        if (floorCount > 3)
+        if (floorCount > 5)
         {
-            floorCount = 3;
+            floorCount = 5;
         }
         else if (floorCount < 1)
         {
@@ -82,6 +82,8 @@ public class TowerAttackScript : BlockingObject
             {
                 Vector3 position = new Vector3(0, 0.1F + (i * segmentHeight), 0);
                 Instantiate(towerPieces.segment1x1, position + basePosition, segmentForward, this.transform);
+                GameObject pickedWrap = towerPieces.siding1x1[Random.Range(0, towerPieces.siding1x1.Count)];
+                Instantiate(pickedWrap, position + basePosition, segmentForward, this.transform);
             }
 
             Vector3 roofPosition = new Vector3(0, 0.1F + floorCount * segmentHeight);
