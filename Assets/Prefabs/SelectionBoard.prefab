@@ -706,7 +706,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 1
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -765,7 +765,6 @@ MonoBehaviour:
   arrowRoot: {x: 0, y: 0, z: 0}
   batalion1: {fileID: 4394893935269397802}
   batalionQty1: {fileID: 6320104767173158089}
-  uiLine: {fileID: 0}
   decalRenderer: {fileID: 0}
   state: 0
 --- !u!1 &4394893935815532158

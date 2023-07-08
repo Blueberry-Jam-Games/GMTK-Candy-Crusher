@@ -33,7 +33,7 @@ public class GameplayUI : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100))
             {
-                Debug.Log("Point was " + hit.point);
+                // Debug.Log("Point was " + hit.point);
                 decalRenderer.transform.position = hit.point + new Vector3(0, 0.75f, 0);
                 if(Input.GetMouseButtonDown(0))
                 {
