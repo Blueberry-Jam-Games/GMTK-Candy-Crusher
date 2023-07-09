@@ -12,8 +12,8 @@ public class TowerAttackScript : BlockingObject
 
     public ModelReferences towerPieces;
     
-    [SerializeField]
-    private float fireRate = 1.0f;
+    private float fireRate;
+    private float damageDone;
     private float nextFire = 0.0f;
 
     [SerializeField]
@@ -21,10 +21,41 @@ public class TowerAttackScript : BlockingObject
     [SerializeField]
     private int maxTargets;
 
+    [SerializeField]
+    private float sprinklesFireRate = 1.0f;
+    [SerializeField]
+    private float sprinklesDamageDone = 5.0f;
+
+    [SerializeField]
+    private float peppermintFireRate = 0.5f;
+    [SerializeField]
+    private float peppermintDamageDone = 7.5f;
+
+    [SerializeField]
+    private float laserFireRate = 2.5f;
+    [SerializeField]
+    private float laserDamageDone = 15.0f;
+
     Dictionary<int, bool> playerTracking;
 
     private void Start()
     {
+        if (attackState == TowerType.SPRINKLES)
+        {
+            fireRate = sprinklesFireRate;
+            damageDone = sprinklesDamageDone;
+        }
+        else if (attackState == TowerType.PEPPERMINT)
+        {
+            fireRate = peppermintFireRate;
+            damageDone = peppermintDamageDone;
+        }
+        else if (attackState == TowerType.LASER)
+        {
+            fireRate = laserFireRate;
+            damageDone = laserDamageDone;
+        }
+
         playerTracking = new Dictionary<int, bool>();
         ammo = 5;
     }
@@ -57,9 +88,12 @@ public class TowerAttackScript : BlockingObject
         ammo += reloadQty;
     }
 
-    void OnTriggerStay(Collider collision)
+    void OnTriggerEnter(Collider collision)
     {
-        ammo += reloadQty;
+        if (collision.gameObject.CompareTag("Soldier") && attackState == TowerType.FROSTING)
+        {
+            collision.gameObject.GetComponent<MediumPlayer>().SlowDown(0.5f);
+        }
     }
 
     void OnTriggerStay(Collider collision)
@@ -76,7 +110,7 @@ public class TowerAttackScript : BlockingObject
             if(playerTracking.ContainsKey(player.id))
             {
                 playerTracking[player.id] = true;
-                if (Time.time > nextFire && ammo > 0)
+                if (Time.time > nextFire && ammo > 0 && attackState != TowerType.FROSTING)
                 {
                     nextFire = Time.time + fireRate;
                     Projectile rocket = Instantiate(bullet, transform.position, transform.rotation).GetComponent<Projectile>();
@@ -88,6 +122,14 @@ public class TowerAttackScript : BlockingObject
                     ammo--;
                 }
             }
+        }
+    }
+
+    void OnTriggerExit(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("Soldier") && attackState == TowerType.FROSTING)
+        {
+            collision.gameObject.GetComponent<MediumPlayer>().SlowDown(2.0f);
         }
     }
 

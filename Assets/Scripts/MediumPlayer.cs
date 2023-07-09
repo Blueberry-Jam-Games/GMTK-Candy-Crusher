@@ -94,6 +94,11 @@ public class MediumPlayer : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    public void SlowDown(float amount)
+    {
+        modifier = modifier * amount;
+    }
 }
 
 public enum PlayerType
