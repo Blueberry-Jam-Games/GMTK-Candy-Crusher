@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class TowerGrid : MonoBehaviour
 {
@@ -71,6 +74,9 @@ public class TowerGrid : MonoBehaviour
             }
         }
 
+#if UNITY_EDITOR
+        markDirty(blockers);
+#endif
         // Apply landscape blocking
         if(Terrain.activeTerrain != null)
         {
@@ -90,6 +96,31 @@ public class TowerGrid : MonoBehaviour
             }
         }
     }
+
+#if UNITY_EDITOR
+    public void markDirty(BlockingObject[] blockers)
+    {
+        foreach(BlockingObject b in blockers)
+        {
+            EditorUtility.SetDirty(b.gameObject);
+            MarkAllChildrenDirty(b.transform);
+        }
+    }
+
+    private void MarkAllChildrenDirty(Transform parent)
+    {
+        for(int i = 0; i < parent.transform.childCount; i++)
+        {
+            Transform child = parent.transform.GetChild(i);
+            EditorUtility.SetDirty(child.gameObject);
+
+            if(child.childCount > 0)
+            {
+                MarkAllChildrenDirty(child);
+            }
+        }
+    }
+#endif
 
     public void removeBlocker(BlockingObject blocker)
     {
