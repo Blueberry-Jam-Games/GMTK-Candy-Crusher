@@ -12,24 +12,40 @@ public class GameplayUI : MonoBehaviour
     [Header("Internal Refs")]
     public Button batalion1;
     public TextMeshProUGUI batalionQty1;
-    public Button rocket;
 
+    public Button batalion2;
+    public TextMeshProUGUI batalionQty2;
+
+    public Button batalion3;
+    public TextMeshProUGUI batalionQty3;
+
+    public Button rocket;
+    public Transform rocketGrid;
+
+    public Button nextWave;
+
+    [Header("Prefabs")]
     public GameObject mediumPlayer;
     public GameObject rocketPrefab;
-    public GameObject decalRenderer;
+    public GameObject decalPrefab;
 
     public UIState state = UIState.DEFAULT;
 
     private int selectedOption; // 1-3 = Batalion, 4 = rocket
 
+    private GameObject activeDecal;
     private GameplayManager gameplayManager;
 
     private void Start()
     {
         gameplayManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameplayManager>();
-        decalRenderer.SetActive(false);
+        activeDecal = GameObject.Instantiate(decalPrefab);
+        decalPrefab.SetActive(false);
         batalion1.onClick.AddListener(OnBatalion1Press);
+        batalion2.onClick.AddListener(OnBatalion2Press);
+        batalion3.onClick.AddListener(OnBatalion3Press);
         rocket.onClick.AddListener(OnRocketPressed);
+        nextWave.onClick.AddListener(DoNextWave);
         UpdateUI();
     }
 
@@ -42,7 +58,7 @@ public class GameplayUI : MonoBehaviour
             if (Physics.Raycast(ray, out hit, 100))
             {
                 // Debug.Log("Point was " + hit.point);
-                decalRenderer.transform.position = hit.point + new Vector3(0, 2f, 0);
+                activeDecal.transform.position = hit.point + new Vector3(0, 2f, 0);
                 if(Input.GetMouseButtonDown(0))
                 {
                     Debug.Log("Mouse clicked, do action");
@@ -64,7 +80,7 @@ public class GameplayUI : MonoBehaviour
                     
                     state = UIState.DEFAULT;
 
-                    decalRenderer.SetActive(false);
+                    activeDecal.SetActive(false);
                 }
             }
             else
@@ -78,11 +94,39 @@ public class GameplayUI : MonoBehaviour
     void UpdateUI()
     {
         batalionQty1.text = gameplayManager.batalionCounts[0].ToString();
+        batalionQty2.text = gameplayManager.batalionCounts[1].ToString();
+        batalionQty3.text = gameplayManager.batalionCounts[2].ToString();
+
+        int rocketsAvailable = gameplayManager.availableRockets;
+        for(int i = 0; i < rocketGrid.childCount; i++)
+        {
+            Transform child = rocketGrid.GetChild(i);
+            Image target = child.gameObject.GetComponent<Image>();
+
+            if(i < rocketsAvailable)
+            {
+                target.enabled = true;
+            }
+            else
+            {
+                target.enabled = false;
+            }
+        }
     }
 
     public void OnBatalion1Press()
     {
         OnBatalionButtonPressed(1);
+    }
+
+    public void OnBatalion2Press()
+    {
+        OnBatalionButtonPressed(2);
+    }
+
+    public void OnBatalion3Press()
+    {
+        OnBatalionButtonPressed(3);
     }
 
     private void OnBatalionButtonPressed(int batalion)
@@ -91,7 +135,7 @@ public class GameplayUI : MonoBehaviour
         {
             state = UIState.SELECTION;
             selectedOption = batalion;
-            decalRenderer.SetActive(true);
+            activeDecal.SetActive(true);
             gameplayManager.batalionCounts[batalion - 1]--;
         }
     }
@@ -107,7 +151,7 @@ public class GameplayUI : MonoBehaviour
                 Debug.Log("rocket select mode");
                 selectedOption = 4;
                 state = UIState.SELECTION;
-                decalRenderer.SetActive(true);
+                activeDecal.SetActive(true);
             }
         }
     }
@@ -132,6 +176,11 @@ public class GameplayUI : MonoBehaviour
         Rocket rocketCode = spawnedRocket.GetComponent<Rocket>();
         rocketCode.Init(where);
         gameplayManager.availableRockets--;
+    }
+
+    private void DoNextWave()
+    {
+        // TODO Here is next wave entry point
     }
 
     private IEnumerator SpawnBattalion(Vector3 target, int type)
