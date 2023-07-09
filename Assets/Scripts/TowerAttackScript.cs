@@ -291,6 +291,7 @@ public class TowerAttackScript : BlockingObject
                 Vector3 adjust = new Vector3(0.5F, 0, 0.5F);
                 topCollider.center = topCollider.center - adjust;
             }
+            
         }
     }
 
