@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3117814376892995773}
   - component: {fileID: 5376297180287787369}
   - component: {fileID: 5599535141101829302}
+  - component: {fileID: -1714849972870642507}
   m_Layer: 0
   m_Name: Peppermint
   m_TagString: Untagged
@@ -62,6 +63,22 @@ CapsuleCollider:
   m_Height: 0.22
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &-1714849972870642507
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6936747844566948664}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &7676612306529372170
 PrefabInstance:
   m_ObjectHideFlags: 0

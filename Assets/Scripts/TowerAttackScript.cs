@@ -212,16 +212,19 @@ public class TowerAttackScript : BlockingObject
             Quaternion segmentForward = new Quaternion();
             segmentForward = Quaternion.Euler(-90, 0, 0);
 
-            Instantiate(towerPieces.base1x1, basePosition + gridAlignment, segmentForward, this.transform);
+            GameObject newBase = Instantiate(towerPieces.base1x1, basePosition + gridAlignment, segmentForward, this.transform);
+            newBase.GetComponent<MeshRenderer>().staticShadowCaster = true;
 
             for(int i = 0; i < floorCount; i++)
             {
                 Vector3 position = new Vector3(0, 0.1F + (i * segmentHeight), 0);
-                Instantiate(towerPieces.segment1x1, position + basePosition + gridAlignment, segmentForward, this.transform);
+                GameObject newPiece = Instantiate(towerPieces.segment1x1, position + basePosition + gridAlignment, segmentForward, this.transform);
+                newPiece.GetComponent<MeshRenderer>().staticShadowCaster = true;
 
                 GameObject pickedWrap = towerPieces.siding1x1[Random.Range(0, towerPieces.siding1x1.Count)];
                 Vector3 detailOffset = new Vector3(0.507859F, 0, 0.516459F);
-                Instantiate(pickedWrap, position + basePosition - detailOffset + gridAlignment, segmentForward, this.transform);
+                GameObject wrap = Instantiate(pickedWrap, position + basePosition - detailOffset + gridAlignment, segmentForward, this.transform);
+                wrap.GetComponent<MeshRenderer>().staticShadowCaster = true;
             }
 
             Vector3 roofPosition = new Vector3(0, 0.1F + floorCount * segmentHeight);
@@ -252,6 +255,11 @@ public class TowerAttackScript : BlockingObject
                 topCollider.size = Vector3.one;
                 Vector3 adjust = new Vector3(0.5F, 0, 0.5F);
                 topCollider.center = topCollider.center - adjust;
+
+                Rigidbody rb = roof.AddComponent<Rigidbody>();
+                rb.isKinematic = true;
+                rb.useGravity = false;
+
             }
         }
         else if(width == 2 && height == 2)
@@ -264,14 +272,17 @@ public class TowerAttackScript : BlockingObject
             Quaternion segmentForward = new Quaternion();
             segmentForward = Quaternion.Euler(-90, 0, 0);
 
-            Instantiate(towerPieces.base2x2,  basePosition + gridAlignment, segmentForward, this.transform);
+            GameObject newbase = Instantiate(towerPieces.base2x2,  basePosition + gridAlignment, segmentForward, this.transform);
+            newbase.GetComponent<MeshRenderer>().staticShadowCaster = true;
 
             for(int i = 0; i < floorCount; i++)
             {
                 Vector3 position = new Vector3(0, 0.15F + (i * segmentHeight), 0);
-                Instantiate(towerPieces.segment2x2, position + basePosition + gridAlignment, segmentForward, this.transform);
+                GameObject towerPiece = Instantiate(towerPieces.segment2x2, position + basePosition + gridAlignment, segmentForward, this.transform);
+                towerPiece.GetComponent<MeshRenderer>().staticShadowCaster = true;
                 GameObject pickedWrap = towerPieces.siding2x2[Random.Range(0, towerPieces.siding2x2.Count)];
-                Instantiate(pickedWrap, position + basePosition + gridAlignment, segmentForward, this.transform);
+                GameObject newWrap = Instantiate(pickedWrap, position + basePosition + gridAlignment, segmentForward, this.transform);
+                newWrap.GetComponent<MeshRenderer>().staticShadowCaster = true;
             }
 
             Vector3 roofPosition = new Vector3(0, 0.15F + floorCount * segmentHeight);
@@ -302,6 +313,10 @@ public class TowerAttackScript : BlockingObject
                 topCollider.size = Vector3.one;
                 Vector3 adjust = new Vector3(0.5F, 0, 0.5F);
                 topCollider.center = topCollider.center - adjust;
+                
+                Rigidbody rb = roof.AddComponent<Rigidbody>();
+                rb.isKinematic = true;
+                rb.useGravity = false;
             }
             
         }
