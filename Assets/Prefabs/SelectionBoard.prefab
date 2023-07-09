@@ -997,6 +997,8 @@ MonoBehaviour:
   decalPrefab: {fileID: 2529233611302397733, guid: f2c2ddf3179905541af42f352eaf2a11,
     type: 3}
   state: 0
+  targetGood: {fileID: 2100000, guid: f3aa2c6d4095bb8489cd180dcf403d1c, type: 2}
+  targetBad: {fileID: 2100000, guid: 37b5d8a1b3fdb7640a008d8bed7158d0, type: 2}
 --- !u!1 &4394893935815532158
 GameObject:
   m_ObjectHideFlags: 0
