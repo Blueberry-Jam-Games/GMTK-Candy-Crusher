@@ -56,12 +56,7 @@ public class TowerAttackScript : BlockingObject
     {
         ammo += reloadQty;
     }
-
-    void OnTriggerStay(Collider collision)
-    {
-        ammo += reloadQty;
-    }
-
+    
     void OnTriggerStay(Collider collision)
     {
         
