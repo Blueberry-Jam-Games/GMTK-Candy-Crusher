@@ -153,6 +153,10 @@ public class TowerAttackScript : BlockingObject
             {
                 Instantiate(towerPieces.laserRoof1x1, roofPosition, forward, this.transform);
             }
+            else if (attackState == TowerType.FROSTING)
+            {
+                Instantiate(towerPieces.frostingRoof1x1, roofPosition, forward, this.transform);
+            }
         }
         else if(width == 2 && height == 2)
         {
@@ -188,6 +192,10 @@ public class TowerAttackScript : BlockingObject
             else if (attackState == TowerType.LASER)
             {
                 Instantiate(towerPieces.laserRoof2x2, roofPosition, forward, this.transform);
+            }
+            else if (attackState == TowerType.FROSTING)
+            {
+                Instantiate(towerPieces.frostingRoof2x2, roofPosition, forward, this.transform);
             }
         }
     }
