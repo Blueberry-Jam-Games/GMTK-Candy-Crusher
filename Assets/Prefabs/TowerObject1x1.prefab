@@ -67,6 +67,12 @@ MonoBehaviour:
   attackMaterials: 0
   floorCount: 1
   towerPieces: {fileID: 11400000, guid: 0eec6b9d9237b794db935455c2ce42fc, type: 2}
-  fireRate: 1
-  bullet: {fileID: 6590633388225575121, guid: 425de1977c3eb4e2e8eb131ef7019953, type: 3}
+  turret: {fileID: 0}
+  bullet: {fileID: 6936747844566948664, guid: eff660885c093704da72c616f8409dfc, type: 3}
   maxTargets: 0
+  sprinklesFireRate: 1
+  sprinklesDamageDone: 5
+  peppermintFireRate: 0.5
+  peppermintDamageDone: 7.5
+  laserFireRate: 2.5
+  laserDamageDone: 15

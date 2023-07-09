@@ -11,6 +11,8 @@ public class TowerAttackScript : BlockingObject
     public int floorCount = 1;
 
     public ModelReferences towerPieces;
+
+    public Turret turret;
     
     private float fireRate;
     private float damageDone;
@@ -55,9 +57,14 @@ public class TowerAttackScript : BlockingObject
             fireRate = laserFireRate;
             damageDone = laserDamageDone;
         }
+        else
+        {
+            fireRate = 0.1f;
+        }
 
         playerTracking = new Dictionary<int, bool>();
         ammo = 5;
+        turret = GetComponentInChildren<Turret>();
     }
 
     private void FixedUpdate()
@@ -110,17 +117,44 @@ public class TowerAttackScript : BlockingObject
             if(playerTracking.ContainsKey(player.id))
             {
                 playerTracking[player.id] = true;
-                if (Time.time > nextFire && ammo > 0 && attackState != TowerType.FROSTING)
+                if (Time.time > nextFire && ammo > 0)
                 {
-                    nextFire = Time.time + fireRate;
-                    Projectile rocket = Instantiate(bullet, transform.position, transform.rotation).GetComponent<Projectile>();
+                    if(attackState != TowerType.FROSTING)
+                    {
+                        nextFire = Time.time + fireRate;
 
-                    rocket.velocity = collision.transform.position - transform.position;
-                    //Debug.Log("Name: " + collision.gameObject.name + " health: " + player.healthPoints);
-                    // do damage
-                    player.DoDamage(damageDone);
-                    ammo--;
+                        if(turret.particles != true)
+                        {
+                            Projectile rocket = Instantiate(bullet, turret.transform.position, transform.rotation).GetComponent<Projectile>();
+                            rocket.velocity = collision.transform.position - turret.transform.position;
+                        }
+                        else
+                        {
+                            turret.gun.time = 0;
+                            turret.gun.Play();
+                        }
+
+                        //Debug.Log("Name: " + collision.gameObject.name + " health: " + player.healthPoints);
+                        // do damage
+                        player.DoDamage(damageDone);
+                        ammo--;
+                    }
+                    else
+                    {
+                        nextFire = Time.time + fireRate;
+                        turret.gun.time = 0;
+                        turret.gun.Play();
+                    }
                 }
+
+                //Aim at stuff
+                Vector3 targetPosition = collision.transform.position;
+                targetPosition.y = turret.transform.position.y;
+                Quaternion aim = Quaternion.LookRotation(targetPosition - turret.transform.position);
+
+                turret.transform.rotation = aim;
+
+                turret.pointAtTarget(collision.gameObject.transform.position);
             }
         }
     }

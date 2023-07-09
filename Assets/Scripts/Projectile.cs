@@ -11,7 +11,7 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         float dx = Vector3.Dot(velocity, new Vector3(1.0f, 0.0f, 0.0f)) * modifier;
-        float dy = 0.0f;//Vector3.Dot(velocity, new Vector3(0.0f, 1.0f, 0.0f)) * modifier;
+        float dy = Vector3.Dot(velocity, new Vector3(0.0f, 1.0f, 0.0f)) * modifier;
         float dz = Vector3.Dot(velocity, new Vector3(0.0f, 0.0f, 1.0f)) * modifier;
 
         Vector3 tempPos = transform.position;
