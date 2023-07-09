@@ -41,9 +41,6 @@ public class TowerAttackScript : BlockingObject
     [SerializeField]
     public int ammo;
 
-    [SerializeField]
-    public int ammo;
-
     Dictionary<int, bool> playerTracking;
 
     private void Start()
