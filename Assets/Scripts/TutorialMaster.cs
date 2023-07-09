@@ -40,6 +40,13 @@ public class TutorialMaster : MonoBehaviour
             "But no more, for it is you, General, who shall retrieve the cookies! Despite their best tower defenses, we shall march!"
         }, BattalionExample));
 
+        
+    }
+
+    private IEnumerator DoInToFrames()
+    {
+        yield return null;
+        yield return null;
         // Init god towers
         GameObject[] towers = GameObject.FindGameObjectsWithTag("Tower");
         for(int i = 0; i < towers.Length; i++)
