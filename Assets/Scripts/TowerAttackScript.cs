@@ -15,7 +15,7 @@ public class TowerAttackScript : BlockingObject
     public Turret turret;
     
     private float fireRate;
-    private float damageDone;
+    public float damageDone;
     private float nextFire = 0.0f;
 
     [SerializeField]
@@ -29,14 +29,14 @@ public class TowerAttackScript : BlockingObject
     public float sprinklesDamageDone = 5.0f;
 
     [SerializeField]
-    private float peppermintFireRate = 0.5f;
+    public float peppermintFireRate = 0.5f;
     [SerializeField]
-    private float peppermintDamageDone = 7.5f;
+    public float peppermintDamageDone = 7.5f;
 
     [SerializeField]
-    private float laserFireRate = 2.5f;
+    public float laserFireRate = 2.5f;
     [SerializeField]
-    private float laserDamageDone = 15.0f;
+    public float laserDamageDone = 15.0f;
 
     [SerializeField]
     public int ammo;

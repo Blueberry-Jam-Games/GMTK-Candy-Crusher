@@ -44,7 +44,7 @@ public class MediumPlayer : MonoBehaviour
 
         if (state == PlayerType.LARGE)
         {
-            modifier = 0.01f;
+            modifier = 0.015f;
             animator.Play("DefaultJawbreaker");
             currentAnimation = "DefaultJawbreaker";
             healthPoints = 30;
