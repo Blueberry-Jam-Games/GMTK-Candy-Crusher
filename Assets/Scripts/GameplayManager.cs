@@ -45,7 +45,8 @@ public class GameplayManager : MonoBehaviour
             {
                 if(currentWave + 1 >= waves.Count)
                 {
-                    // Game Over
+                    LevelLoader gameOver = FindObjectOfType<LevelLoader>();
+                    StartCoroutine(gameOver.LoadLevel("GameOver"));
                 }
                 else
                 {

@@ -25,7 +25,7 @@ public class LevelLoader : MonoBehaviour
         }
     }
 
-    IEnumerator LoadLevel(string scene)
+    public IEnumerator LoadLevel(string scene)
     {
         transition.Play("ingerRunningg");
         yield return new WaitForSeconds(0.7f);
