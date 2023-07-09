@@ -249,5 +249,7 @@ public class TutorialMaster : MonoBehaviour
     {
         text.transform.parent.gameObject.SetActive(false);
         portrait.gameObject.SetActive(false);
+        //GameObject winScreen = GameObject.FindWithTag("WinScreen");
+        //winScreen.GetComponent<Canvas>().enabled = true;
     }
 }

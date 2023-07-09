@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/GrayboxTest.unity
-    guid: 3cbf63c748585b84e833ae6bc6ff1411
+    path: Assets/Scenes/TitleScreen.unity
+    guid: 6bbc2e1924ee0487a874c325a332b1fa
   - enabled: 1
-    path: Assets/Scenes/CandyLand Kaiden.unity
-    guid: 748792ea5fa09cf46b3503480e6bef10
+    path: Assets/Scenes/TutorialScene.unity
+    guid: 435f2f3afbdb58f4e981cf3ddf960aed
   - enabled: 1
     path: Assets/Scenes/GrayboxTestQuinnConnor.unity
     guid: 8b3a30fa16e034b7d906ff7be9a4d4c4

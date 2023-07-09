@@ -78,6 +78,14 @@ public class MediumPlayer : MonoBehaviour
             List<int> node = towerGrid.NextPos((int)x, (int)y);
             if (node[0] == -1 && node[1] == -1)
             {
+                /*ListScenes gameplay = FindObjectOfType<ListScenes>();
+                if (gameplay.levels[gameplay.currentLevel] != "TutorialScene")
+                {*/
+                    GameObject winScreen = GameObject.FindWithTag("WinScreen");
+                    winScreen.GetComponent<Canvas>().enabled = true;
+                //}
+                
+                
                 // Quinn needs to play an animation to destroy the player.
                 Destroy(gameObject);
             }
