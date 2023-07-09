@@ -68,8 +68,10 @@ public class GameplayUI : MonoBehaviour
                         tempPos.x = Mathf.Floor(hit.point.x);
                         tempPos.y = Mathf.Floor(hit.point.y);
                         tempPos.z = Mathf.Floor(hit.point.z);
-                        if (tempPos.z == 0.0f)
+                        if (tempPos.z == 0.0f && gameplayManager.batalionCounts[selectedOption - 1] != 0)
                         {
+                            gameplayManager.batalionCounts[selectedOption - 1]--;
+                            UpdateUI();
                             DoPlayerAction(tempPos, selectedOption);
                         }
                     }
@@ -131,12 +133,11 @@ public class GameplayUI : MonoBehaviour
 
     private void OnBatalionButtonPressed(int batalion)
     {
-        if (state == UIState.DEFAULT && gameplayManager.batalionCounts[batalion - 1] != 0)
+        if (state == UIState.DEFAULT)
         {
             state = UIState.SELECTION;
             selectedOption = batalion;
             activeDecal.SetActive(true);
-            gameplayManager.batalionCounts[batalion - 1]--;
         }
     }
 
@@ -176,6 +177,7 @@ public class GameplayUI : MonoBehaviour
         Rocket rocketCode = spawnedRocket.GetComponent<Rocket>();
         rocketCode.Init(where);
         gameplayManager.availableRockets--;
+        UpdateUI();
     }
 
     private void DoNextWave()
