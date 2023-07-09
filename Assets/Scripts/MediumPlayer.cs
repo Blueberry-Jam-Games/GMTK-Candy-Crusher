@@ -173,7 +173,7 @@ public class MediumPlayer : MonoBehaviour
             tempPos.z += direction.y * modifier;
         }
 
-        float height = Terrain.activeTerrain.SampleHeight(new Vector3(tempPos.x, 0, tempPos.y)) + 0.5f;
+        float height = Terrain.activeTerrain.SampleHeight(new Vector3(tempPos.x, 0, tempPos.z)) + 0.5f;
         tempPos.y = height;
 
         transform.position = tempPos;
