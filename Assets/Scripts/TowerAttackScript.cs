@@ -59,6 +59,12 @@ public class TowerAttackScript : BlockingObject
 
     void OnTriggerStay(Collider collision)
     {
+        ammo += reloadQty;
+    }
+
+    void OnTriggerStay(Collider collision)
+    {
+        
         if (collision.gameObject.CompareTag("Soldier"))
         {
             MediumPlayer player = collision.gameObject.GetComponent<MediumPlayer>();
@@ -70,7 +76,7 @@ public class TowerAttackScript : BlockingObject
             if(playerTracking.ContainsKey(player.id))
             {
                 playerTracking[player.id] = true;
-                if (Time.time > nextFire && ammo > 5)
+                if (Time.time > nextFire && ammo > 0)
                 {
                     nextFire = Time.time + fireRate;
                     Projectile rocket = Instantiate(bullet, transform.position, transform.rotation).GetComponent<Projectile>();
