@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CandyLand Kaiden.unity
     guid: 748792ea5fa09cf46b3503480e6bef10
+  - enabled: 1
+    path: Assets/Scenes/GrayboxTestQuinnConnor.unity
+    guid: 8b3a30fa16e034b7d906ff7be9a4d4c4
   m_configObjects: {}
