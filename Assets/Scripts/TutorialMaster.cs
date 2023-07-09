@@ -196,7 +196,7 @@ public class TutorialMaster : MonoBehaviour
     public void SecondBattalionDestroyed()
     {
         StartCoroutine(DoDialogue(new List<string>(){
-            "Hold on, we aren’t restricted to just these soldiers.",
+            "Darn, still too powerful. But these aren't the only forces you have access to.",
             "Blue soldiers are fast and plentiful, red soldiers are heartier but harder to come by, and stripey soldiers are battle hardened and ready for the front lines.",
             "Unfortunately, you don’t have any in your squad right now, so hit the hourglass to wait for reinforcements, we can send help."
         }, ReenforcementButtonReady));

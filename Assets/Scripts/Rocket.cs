@@ -8,6 +8,8 @@ public class Rocket : MonoBehaviour
     private Rigidbody rb;
     public delegate void OnRocketLand();
 
+    public AudioSource launch;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -22,6 +24,7 @@ public class Rocket : MonoBehaviour
         }
 
         rb.velocity = new Vector3(0, -5, 0);
+        launch.Play();
     }
 
     private void OnCollisionEnter(Collision hit)

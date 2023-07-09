@@ -202,6 +202,19 @@ public class MediumPlayer : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        if(state == PlayerType.SMALL)
+        {
+            TowerAudio.Instance.Play("bluehit");
+        }
+        else if(state == PlayerType.MEDIUM)
+        {
+            TowerAudio.Instance.Play("redhit");
+        }
+        else if(state == PlayerType.LARGE)
+        {
+            TowerAudio.Instance.Play("jawbreakerhit");
+        }
     }
 
     public void SlowDown(float amount)

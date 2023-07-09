@@ -130,6 +130,14 @@ public class TowerAttackScript : BlockingObject
                         {
                             Projectile rocket = Instantiate(bullet, turret.transform.position, transform.rotation).GetComponent<Projectile>();
                             rocket.velocity = collision.transform.position - turret.transform.position;
+                            if(attackState == TowerType.LASER)
+                            {
+                                TowerAudio.Instance.Play("laser");
+                            }
+                            else if(attackState == TowerType.PEPPERMINT)
+                            {
+                                TowerAudio.Instance.Play("fasttower");
+                            }
                         }
                         else
                         {
@@ -147,6 +155,7 @@ public class TowerAttackScript : BlockingObject
                         nextFire = Time.time + fireRate;
                         turret.gun.time = 0;
                         turret.gun.Play();
+                        TowerAudio.Instance.Play("mist");
                     }
                 }
 
