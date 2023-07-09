@@ -27,6 +27,13 @@ public class LevelLoader : MonoBehaviour
         }
     }
 
+    public void retryLevel()
+    {
+        ListScenes gameplay = FindObjectOfType<ListScenes>();
+        Debug.Log("current Level: " + gameplay.currentLevel);
+        StartCoroutine(LoadLevel(gameplay.levels[gameplay.currentLevel]));
+    }
+
     public void findNextLevel()
     {
         GameObject winScreen = GameObject.FindWithTag("WinScreen");
@@ -46,7 +53,10 @@ public class LevelLoader : MonoBehaviour
     public void MainMenu()
     {
         GameObject winScreen = GameObject.FindWithTag("WinScreen");
-        winScreen.GetComponent<Canvas>().enabled = false;
+        if (winScreen != null)
+        {
+            winScreen.GetComponent<Canvas>().enabled = false;
+        }
         ListScenes gameplay = FindObjectOfType<ListScenes>();
         gameplay.currentLevel = 0;
         StartCoroutine(LoadLevel(gameplay.levels[gameplay.currentLevel]));

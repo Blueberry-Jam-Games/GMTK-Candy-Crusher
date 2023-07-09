@@ -44,7 +44,7 @@ public class MediumPlayer : MonoBehaviour
 
         if (state == PlayerType.LARGE)
         {
-            modifier = 0.01f;
+            modifier = 0.015f;
             animator.Play("DefaultJawbreaker");
             currentAnimation = "DefaultJawbreaker";
             healthPoints = 30;
@@ -78,8 +78,13 @@ public class MediumPlayer : MonoBehaviour
             List<int> node = towerGrid.NextPos((int)x, (int)y);
             if (node[0] == -1 && node[1] == -1)
             {
-                GameObject winScreen = GameObject.FindWithTag("WinScreen");
-                winScreen.GetComponent<Canvas>().enabled = true;
+                /*ListScenes gameplay = FindObjectOfType<ListScenes>();
+                if (gameplay.levels[gameplay.currentLevel] != "TutorialScene")
+                {*/
+                    GameObject winScreen = GameObject.FindWithTag("WinScreen");
+                    winScreen.GetComponent<Canvas>().enabled = true;
+                //}
+                
                 
                 // Quinn needs to play an animation to destroy the player.
                 Destroy(gameObject);
