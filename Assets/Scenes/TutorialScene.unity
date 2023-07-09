@@ -53348,6 +53348,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6223893667729424909, guid: 9351d83a519aebc4685edcfb75481d65,
         type: 3}
+      propertyPath: damageDone
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6223893667729424909, guid: 9351d83a519aebc4685edcfb75481d65,
+        type: 3}
       propertyPath: floorCount
       value: 3
       objectReference: {fileID: 0}
@@ -53359,7 +53364,7 @@ PrefabInstance:
     - target: {fileID: 6223893667729424909, guid: 9351d83a519aebc4685edcfb75481d65,
         type: 3}
       propertyPath: attackState
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6223893667729424910, guid: 9351d83a519aebc4685edcfb75481d65,
         type: 3}
