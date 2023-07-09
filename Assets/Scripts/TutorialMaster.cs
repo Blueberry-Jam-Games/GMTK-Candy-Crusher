@@ -26,19 +26,11 @@ public class TutorialMaster : MonoBehaviour
     [Header("External but in scene")]
     public GameplayUI ui;
     private GameplayManager gm;
-    public TowerAttackScript godtower;
-    public TowerAttackScript godtower2;
 
     int state = 0;
 
     void Start()
     {
-        godtower.ReloadAmmo(500);
-        godtower.maxTargets = 20;
-        godtower.sprinklesFireRate = 0.25f;
-        godtower2.ReloadAmmo(500);
-        godtower2.maxTargets = 20;
-        godtower2.sprinklesFireRate = 0.25f;
         light1.SetActive(false);
         light2.SetActive(false);
         gm = GameObject.FindWithTag("GameController").GetComponent<GameplayManager>();
@@ -47,6 +39,17 @@ public class TutorialMaster : MonoBehaviour
             "For years our cookies have been stolen from us. These men and women live in their ginger towns eating treats to no end.",
             "But no more, for it is you, General, who shall retrieve the cookies! Despite their best tower defenses, we shall march!"
         }, BattalionExample));
+
+        // Init god towers
+        GameObject[] towers = GameObject.FindGameObjectsWithTag("Tower");
+        for(int i = 0; i < towers.Length; i++)
+        {
+            TowerAttackScript current = towers[i].GetComponent<TowerAttackScript>();
+            current.sprinklesFireRate = 0.25f;
+            current.peppermintFireRate = 0.25f;
+            current.laserFireRate = 0.5f;
+            current.ammo = 1000;
+        }
     }
 
     private IEnumerator DoDialogue(List<string> lines, OnComplete onComplete)
@@ -215,11 +218,6 @@ public class TutorialMaster : MonoBehaviour
         Debug.Log("Reenforcement pressed");
         ui.tutorialNextWave -= ReenfocementsPressed;
 
-        godtower.sprinklesFireRate = 5f;
-        godtower.sprinklesDamageDone = 1f;
-        godtower2.sprinklesFireRate = 5f;
-        godtower2.sprinklesDamageDone = 1f;
-
         ReinforcementsArrived();
     }
 
@@ -233,6 +231,18 @@ public class TutorialMaster : MonoBehaviour
             "But watch out, enemy towers have limited ammo. While you wait for Reinforcements, they can fortify their positions.",
             "Your stripey soldier has arrived, give him the order to RETRIEVE THE COOKIES!"
         }, EndText));
+
+        // Depower towers
+        GameObject[] towers = GameObject.FindGameObjectsWithTag("Tower");
+        for(int i = 0; i < towers.Length; i++)
+        {
+            TowerAttackScript current = towers[i].GetComponent<TowerAttackScript>();
+            current.sprinklesFireRate = 1f;
+            current.peppermintFireRate = 0.5f;
+            current.laserFireRate = 2.5f;
+            current.damageDone = 0.0f;
+            current.ammo = 5;
+        }
     }
 
     public void EndText()
