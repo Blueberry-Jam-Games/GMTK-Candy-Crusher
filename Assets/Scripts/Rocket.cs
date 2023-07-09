@@ -32,8 +32,8 @@ public class Rocket : MonoBehaviour
             Object.Instantiate(explosion, transform.position, Quaternion.Euler(0, 0, 0));
             hit.gameObject.transform.parent.gameObject.GetComponent<TowerAttackScript>().destroyMe();
             Destroy(hit.gameObject.transform.parent.gameObject);
-            Destroy(this.gameObject);
         }
+        Destroy(this.gameObject);
         
         /*Collider[] destroyCheck = Physics.OverlapSphere(new Vector3(transform.position.x, 0, transform.position.y), 0.5F);
         List<GameObject> markedForDestroy = new List<GameObject>();
