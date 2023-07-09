@@ -11,16 +11,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TutorialScene.unity
     guid: 435f2f3afbdb58f4e981cf3ddf960aed
-<<<<<<< HEAD
-  - enabled: 1
-    path: Assets/Scenes/PlayableLevel2.unity
-    guid: 484239ffa26484ae9b243ee6d9b7a9ca
-=======
->>>>>>> 829d9b6b24c91252e5849e3600d7e38def257f7b
   - enabled: 1
     path: Assets/Scenes/GrayboxTestQuinnConnor.unity
     guid: 8b3a30fa16e034b7d906ff7be9a4d4c4
   - enabled: 1
+    path: Assets/Scenes/PlayableLevel2.unity
+    guid: 484239ffa26484ae9b243ee6d9b7a9ca
+  - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: 4c89538f26bc14a0197c9c7109229d48
+  - enabled: 1
+    path: Assets/Scenes/ThanksForPlaying.unity
+    guid: 76d6db0617fdd904dae10f8124604d00
   m_configObjects: {}
