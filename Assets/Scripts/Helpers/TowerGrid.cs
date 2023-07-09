@@ -91,6 +91,18 @@ public class TowerGrid : MonoBehaviour
         }
     }
 
+    public void removeBlocker(BlockingObject blocker)
+    {
+        for(int x = 0; x < blocker.width; x++)
+        {
+            for(int y = 0; y < blocker.height; y++)
+            {
+                Debug.Log("applying grid spot " + (blocker.GetX()+x) + ", " + (blocker.GetZ()+y));
+                grid.Set(blocker.GetX() + x, blocker.GetZ() + y, 0);
+            }
+        }
+    }
+
     public List<int> NextPos(int startRow, int startCol)
     {
         int n = grid.width;
