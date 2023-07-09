@@ -427,6 +427,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 675453f0a763c4dcab8a92f15ee44436, type: 3}
+<<<<<<< HEAD
+=======
 --- !u!1001 &826897167
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -496,6 +498,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04a8a089ed1b33b49a228540f03d7e9f, type: 3}
+>>>>>>> 829d9b6b24c91252e5849e3600d7e38def257f7b
 --- !u!1 &1115083728
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,6 +531,10 @@ MonoBehaviour:
   levels:
   - TitleScreen
   - TutorialScene
+<<<<<<< HEAD
+  - PlayableLevel2
+=======
+>>>>>>> 829d9b6b24c91252e5849e3600d7e38def257f7b
   - GrayboxTestQuinnConnor
   currentLevel: 0
 --- !u!4 &1115083730
