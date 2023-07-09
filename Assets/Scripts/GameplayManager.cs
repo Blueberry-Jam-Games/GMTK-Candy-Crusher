@@ -59,14 +59,16 @@ public class GameplayManager : MonoBehaviour
 
     public void NextWave()
     {
+        Debug.Log("NextWave");
         currentWave++;
-        if(currentWave >= waves.Count)
+        if(currentWave > waves.Count)
         {
             // Game over
         }
         else
         {
-            Wave newWave = waves[currentWave];
+            Wave newWave = waves[currentWave - 1];
+
             for(int i = 0; i < newWave.reloads.Count; i++)
             {
                 TowerReload reload = newWave.reloads[i];
