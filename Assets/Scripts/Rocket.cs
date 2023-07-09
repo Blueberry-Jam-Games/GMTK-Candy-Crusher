@@ -8,6 +8,9 @@ public class Rocket : MonoBehaviour
     private Rigidbody rb;
     public delegate void OnRocketLand();
 
+    public AudioSource launch;
+    public AudioSource land;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -22,6 +25,7 @@ public class Rocket : MonoBehaviour
         }
 
         rb.velocity = new Vector3(0, -5, 0);
+        launch.Play();
     }
 
     private void OnCollisionEnter(Collision hit)
@@ -34,6 +38,8 @@ public class Rocket : MonoBehaviour
             Destroy(hit.gameObject.transform.parent.gameObject);
         }
         Destroy(this.gameObject);
+
+        land.Play();
         
         /*Collider[] destroyCheck = Physics.OverlapSphere(new Vector3(transform.position.x, 0, transform.position.y), 0.5F);
         List<GameObject> markedForDestroy = new List<GameObject>();
