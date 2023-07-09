@@ -40,6 +40,10 @@ public class GameplayUI : MonoBehaviour
     private GameObject activeDecal;
     private GameplayManager gameplayManager;
 
+    public delegate void OnEvent();
+    public OnEvent tutorialBatalionSpawned;
+    public OnEvent tutorialNextWave;
+
     private void Start()
     {
         gameplayManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameplayManager>();
@@ -114,7 +118,7 @@ public class GameplayUI : MonoBehaviour
         }
     }
 
-    void UpdateUI()
+    public void UpdateUI()
     {
         batalionQty1.text = gameplayManager.batalionCounts[0].ToString();
         batalionQty2.text = gameplayManager.batalionCounts[1].ToString();
@@ -188,6 +192,7 @@ public class GameplayUI : MonoBehaviour
     {
 
         StartCoroutine(SpawnBattalion(target, type));
+        tutorialBatalionSpawned?.Invoke();
         UpdateUI();
     }
 
@@ -205,6 +210,7 @@ public class GameplayUI : MonoBehaviour
     {
         //TODO Add sound
         gameplayManager.NextWave();
+        tutorialNextWave?.Invoke();
         UpdateUI();
     }
 
