@@ -12,19 +12,15 @@ public class GameplayManager : MonoBehaviour
     public int[] batalionCounts;
     public int availableRockets;
 
+    public TowerAttackScript[] towers;
+
+    public int sprinklesReload;
+    public int peppermintReload;
+    public int laserReload;
+
     void Start()
     {
-        Wave initial = waves[0];
-        batalionCounts = new int[initial.batalionReloads.Length];
-        for(int i = 0; i < batalionCounts.Length; i++)
-        {
-            batalionCounts[i] = initial.batalionReloads[i];
-        }
-        availableRockets = initial.rocketReloads;
-        if(initial.reloads.Count != 0)
-        {
-            Debug.LogError("Tower initial ammo is set at the tower not in the wave");
-        }
+         towers = FindObjectsOfType<TowerAttackScript>();
     }
 
     private void Update()
@@ -70,11 +66,22 @@ public class GameplayManager : MonoBehaviour
         {
             Wave newWave = waves[currentWave - 1];
 
-            for(int i = 0; i < newWave.reloads.Count; i++)
+            foreach(TowerAttackScript t in towers)
             {
-                TowerReload reload = newWave.reloads[i];
-                reload.target.ReloadAmmo(reload.reloadQuantity);
+                if(t.attackState == TowerType.SPRINKLES)
+                {
+                    t.ReloadAmmo(sprinklesReload);
+                }
+                else if(t.attackState == TowerType.PEPPERMINT)
+                {
+                    t.ReloadAmmo(peppermintReload);
+                }
+                else if(t.attackState == TowerType.LASER)
+                {
+                    t.ReloadAmmo(laserReload);
+                }
             }
+
             for(int i = 0; i < batalionCounts.Length; i++)
             {
                 batalionCounts[i] += newWave.batalionReloads[i];
@@ -87,7 +94,6 @@ public class GameplayManager : MonoBehaviour
 [System.Serializable]
 public class Wave
 {
-    public List<TowerReload> reloads;
     public int[] batalionReloads;
     public int rocketReloads;
 }
