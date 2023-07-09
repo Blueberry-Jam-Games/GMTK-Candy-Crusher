@@ -38,6 +38,9 @@ public class TowerAttackScript : BlockingObject
     [SerializeField]
     private float laserDamageDone = 15.0f;
 
+    [SerializeField]
+    private int ammo;
+
     Dictionary<int, bool> playerTracking;
 
     private void Start()
@@ -87,8 +90,6 @@ public class TowerAttackScript : BlockingObject
             playerTracking.Remove(i);
         }
     }
-
-    private int ammo;
 
     public void ReloadAmmo(int reloadQty)
     {

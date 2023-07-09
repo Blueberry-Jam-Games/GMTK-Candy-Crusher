@@ -14,17 +14,7 @@ public class GameplayManager : MonoBehaviour
 
     void Start()
     {
-        Wave initial = waves[0];
-        batalionCounts = new int[initial.batalionReloads.Length];
-        for(int i = 0; i < batalionCounts.Length; i++)
-        {
-            batalionCounts[i] = initial.batalionReloads[i];
-        }
-        availableRockets = initial.rocketReloads;
-        if(initial.reloads.Count != 0)
-        {
-            Debug.LogError("Tower initial ammo is set at the tower not in the wave");
-        }
+        //
     }
 
     private void Update()
@@ -72,7 +62,10 @@ public class GameplayManager : MonoBehaviour
             for(int i = 0; i < newWave.reloads.Count; i++)
             {
                 TowerReload reload = newWave.reloads[i];
-                reload.target.ReloadAmmo(reload.reloadQuantity);
+                if(reload != null)
+                {
+                    reload.target.ReloadAmmo(reload.reloadQuantity);
+                }
             }
             for(int i = 0; i < batalionCounts.Length; i++)
             {
