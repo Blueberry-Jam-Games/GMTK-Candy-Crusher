@@ -54,7 +54,7 @@ public class MediumPlayer : MonoBehaviour
     void FixedUpdate()
     {
         //Debug.Log("transform.position.x: " + transform.position.x + "targetPosition.x: " + targetPosition.x + "transform.position.z: " + transform.position.z + "targetPosition.y: " + targetPosition.y);
-        if (0.02f > Math.Abs(targetPosition.x - transform.position.x) && 0.02f > Math.Abs(targetPosition.y - transform.position.z))
+        if (0.1f > Math.Abs(targetPosition.x - transform.position.x) && 0.1f > Math.Abs(targetPosition.y - transform.position.z))
         {
             float x = targetPosition.x;
             float y = targetPosition.y;
@@ -93,6 +93,11 @@ public class MediumPlayer : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    public void SlowDown(float amount)
+    {
+        modifier = modifier * amount;
     }
 }
 

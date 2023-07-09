@@ -12,8 +12,8 @@ public class TowerAttackScript : BlockingObject
 
     public ModelReferences towerPieces;
     
-    [SerializeField]
-    private float fireRate = 1.0f;
+    private float fireRate;
+    private float damageDone;
     private float nextFire = 0.0f;
 
     [SerializeField]
@@ -21,10 +21,41 @@ public class TowerAttackScript : BlockingObject
     [SerializeField]
     private int maxTargets;
 
+    [SerializeField]
+    private float sprinklesFireRate = 1.0f;
+    [SerializeField]
+    private float sprinklesDamageDone = 5.0f;
+
+    [SerializeField]
+    private float peppermintFireRate = 0.5f;
+    [SerializeField]
+    private float peppermintDamageDone = 7.5f;
+
+    [SerializeField]
+    private float laserFireRate = 2.5f;
+    [SerializeField]
+    private float laserDamageDone = 15.0f;
+
     Dictionary<int, bool> playerTracking;
 
     private void Start()
     {
+        if (attackState == TowerType.SPRINKLES)
+        {
+            fireRate = sprinklesFireRate;
+            damageDone = sprinklesDamageDone;
+        }
+        else if (attackState == TowerType.PEPPERMINT)
+        {
+            fireRate = peppermintFireRate;
+            damageDone = peppermintDamageDone;
+        }
+        else if (attackState == TowerType.LASER)
+        {
+            fireRate = laserFireRate;
+            damageDone = laserDamageDone;
+        }
+
         playerTracking = new Dictionary<int, bool>();
         ammo = 5;
     }
@@ -56,7 +87,15 @@ public class TowerAttackScript : BlockingObject
     {
         ammo += reloadQty;
     }
-    
+
+    void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("Soldier") && attackState == TowerType.FROSTING)
+        {
+            collision.gameObject.GetComponent<MediumPlayer>().SlowDown(0.5f);
+        }
+    }
+
     void OnTriggerStay(Collider collision)
     {
         
@@ -71,18 +110,26 @@ public class TowerAttackScript : BlockingObject
             if(playerTracking.ContainsKey(player.id))
             {
                 playerTracking[player.id] = true;
-                if (Time.time > nextFire && ammo > 0)
+                if (Time.time > nextFire && ammo > 0 && attackState != TowerType.FROSTING)
                 {
                     nextFire = Time.time + fireRate;
                     Projectile rocket = Instantiate(bullet, transform.position, transform.rotation).GetComponent<Projectile>();
 
                     rocket.velocity = collision.transform.position - transform.position;
-                    Debug.Log("Name: " + collision.gameObject.name + " health: " + player.healthPoints);
+                    //Debug.Log("Name: " + collision.gameObject.name + " health: " + player.healthPoints);
                     // do damage
-                    player.DoDamage(5f);
+                    player.DoDamage(damageDone);
                     ammo--;
                 }
             }
+        }
+    }
+
+    void OnTriggerExit(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("Soldier") && attackState == TowerType.FROSTING)
+        {
+            collision.gameObject.GetComponent<MediumPlayer>().SlowDown(2.0f);
         }
     }
 
@@ -144,19 +191,21 @@ public class TowerAttackScript : BlockingObject
             {
                 roof = Instantiate(towerPieces.sprinklesRoof1x1, roofPosition, forward, this.transform);
             }
+            else if (attackState == TowerType.LASER)
+            {
+                roof = Instantiate(towerPieces.laserRoof1x1, roofPosition, forward, this.transform);
+            }
+            else if (attackState == TowerType.FROSTING)
+            {
+                roof = Instantiate(towerPieces.frostingRoof1x1, roofPosition, forward, this.transform);
+            }
 
             if(roof != null)
             {
                 BoxCollider topCollider = roof.AddComponent<BoxCollider>();
                 topCollider.size = Vector3.one;
-            }
-            else if (attackState == TowerType.LASER)
-            {
-                Instantiate(towerPieces.laserRoof1x1, roofPosition, forward, this.transform);
-            }
-            else if (attackState == TowerType.FROSTING)
-            {
-                Instantiate(towerPieces.frostingRoof1x1, roofPosition, forward, this.transform);
+                Vector3 adjust = new Vector3(0.5F, 0, 0.5F);
+                topCollider.center = topCollider.center - adjust;
             }
         }
         else if(width == 2 && height == 2)
@@ -182,23 +231,39 @@ public class TowerAttackScript : BlockingObject
             Vector3 roofPosition = new Vector3(0, 0.15F + floorCount * segmentHeight);
             roofPosition += basePosition + gridAlignment;
 
+            GameObject roof = null;
+
             if (attackState == TowerType.PEPPERMINT)
             {
-                Instantiate(towerPieces.peppermintRoof2x2, roofPosition, forward, this.transform);
+                roof = Instantiate(towerPieces.peppermintRoof2x2, roofPosition, forward, this.transform);
             }
             else if (attackState == TowerType.SPRINKLES)
             {
-                Instantiate(towerPieces.sprinklesRoof2x2, roofPosition, forward, this.transform);
+                roof = Instantiate(towerPieces.sprinklesRoof2x2, roofPosition, forward, this.transform);
             }
             else if (attackState == TowerType.LASER)
             {
-                Instantiate(towerPieces.laserRoof2x2, roofPosition, forward, this.transform);
+                roof = Instantiate(towerPieces.laserRoof2x2, roofPosition, forward, this.transform);
             }
             else if (attackState == TowerType.FROSTING)
             {
-                Instantiate(towerPieces.frostingRoof2x2, roofPosition, forward, this.transform);
+                roof = Instantiate(towerPieces.frostingRoof2x2, roofPosition, forward, this.transform);
+            }
+
+            if(roof != null)
+            {
+                BoxCollider topCollider = roof.AddComponent<BoxCollider>();
+                topCollider.size = Vector3.one * 2;
+                Vector3 adjust = new Vector3(1F, 0, 1F);
+                topCollider.center = topCollider.center - adjust;
             }
         }
+    }
+
+    public void destroyMe()
+    {
+        TowerGrid grid = GameObject.FindGameObjectWithTag("TowerGrid").GetComponent<TowerGrid>();
+        grid.removeBlocker(this);
     }
 }
 
