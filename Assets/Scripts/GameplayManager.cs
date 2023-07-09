@@ -12,9 +12,15 @@ public class GameplayManager : MonoBehaviour
     public int[] batalionCounts;
     public int availableRockets;
 
+    public TowerAttackScript[] towers;
+
+    public int sprinklesReload;
+    public int peppermintReload;
+    public int laserReload;
+
     void Start()
     {
-        //
+         towers = FindObjectsOfType<TowerAttackScript>();
     }
 
     private void Update()
@@ -59,14 +65,22 @@ public class GameplayManager : MonoBehaviour
         {
             Wave newWave = waves[currentWave - 1];
 
-            for(int i = 0; i < newWave.reloads.Count; i++)
+            foreach(TowerAttackScript t in towers)
             {
-                TowerReload reload = newWave.reloads[i];
-                if(reload != null)
+                if(t.attackState == TowerType.SPRINKLES)
                 {
-                    reload.target.ReloadAmmo(reload.reloadQuantity);
+                    t.ReloadAmmo(sprinklesReload);
+                }
+                else if(t.attackState == TowerType.PEPPERMINT)
+                {
+                    t.ReloadAmmo(peppermintReload);
+                }
+                else if(t.attackState == TowerType.LASER)
+                {
+                    t.ReloadAmmo(laserReload);
                 }
             }
+
             for(int i = 0; i < batalionCounts.Length; i++)
             {
                 batalionCounts[i] += newWave.batalionReloads[i];
@@ -79,7 +93,6 @@ public class GameplayManager : MonoBehaviour
 [System.Serializable]
 public class Wave
 {
-    public List<TowerReload> reloads;
     public int[] batalionReloads;
     public int rocketReloads;
 }
