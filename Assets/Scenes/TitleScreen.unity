@@ -459,6 +459,7 @@ MonoBehaviour:
   levels:
   - TitleScreen
   - TutorialScene
+  - PlayableLevel2
   - GrayboxTestQuinnConnor
   currentLevel: 0
 --- !u!4 &1115083730
