@@ -20,15 +20,7 @@ public class GameplayManager : MonoBehaviour
 
     void Start()
     {
-        Wave initial = waves[0];
-        batalionCounts = new int[initial.batalionReloads.Length];
-        for(int i = 0; i < batalionCounts.Length; i++)
-        {
-            batalionCounts[i] = initial.batalionReloads[i];
-        }
-        availableRockets = initial.rocketReloads;
-
-        towers = FindObjectsOfType<TowerAttackScript>();
+         towers = FindObjectsOfType<TowerAttackScript>();
     }
 
     private void Update()
