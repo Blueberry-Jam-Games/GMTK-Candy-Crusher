@@ -44,9 +44,10 @@ public class MediumPlayer : MonoBehaviour
 
         if (state == PlayerType.LARGE)
         {
-            modifier = 0.01f;
+            modifier = 0.015f;
             animator.Play("DefaultJawbreaker");
             currentAnimation = "DefaultJawbreaker";
+            healthPoints = 30;
         }
         else if (state == PlayerType.MEDIUM)
         {
@@ -54,12 +55,14 @@ public class MediumPlayer : MonoBehaviour
             localRenderer.sharedMaterial.SetFloat("_HueShift", 0f);
             animator.Play("Default");
             currentAnimation = "Default";
+            healthPoints = 15;
         }
         else if (state == PlayerType.SMALL)
         {
             modifier = 0.05f;
             localRenderer.sharedMaterial.SetFloat("_HueShift", 210f);
             animator.Play("Default");
+            healthPoints = 10;
         }
 
         this.id = GLOBAL_ID++;

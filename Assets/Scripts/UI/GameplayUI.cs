@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Rendering.Universal;
 
 public class GameplayUI : MonoBehaviour
 {
@@ -33,8 +34,15 @@ public class GameplayUI : MonoBehaviour
 
     private int selectedOption; // 1-3 = Batalion, 4 = rocket
 
+    public Material targetGood;
+    public Material targetBad;
+
     private GameObject activeDecal;
     private GameplayManager gameplayManager;
+
+    public delegate void OnEvent();
+    public OnEvent tutorialBatalionSpawned;
+    public OnEvent tutorialNextWave;
 
     private void Start()
     {
@@ -58,7 +66,24 @@ public class GameplayUI : MonoBehaviour
             if (Physics.Raycast(ray, out hit, 100))
             {
                 // Debug.Log("Point was " + hit.point);
-                activeDecal.transform.position = hit.point + new Vector3(0, 2f, 0);
+                activeDecal.transform.position = hit.point + new Vector3(0, 3f, 0);
+
+                DecalProjector decal = activeDecal.GetComponent<DecalProjector>();
+                if (Mathf.Floor(hit.point.z) == 0.0f && gameplayManager.batalionCounts[selectedOption - 1] != 0)
+                {
+                    if (decal.material != targetGood)
+                    {
+                        decal.material = targetGood;
+                    }
+                }
+                else
+                {
+                    if (decal.material != targetBad)
+                    {
+                        decal.material = targetBad;
+                    }
+                }
+
                 if(Input.GetMouseButtonDown(0))
                 {
                     Debug.Log("Mouse clicked, do action");
@@ -93,7 +118,7 @@ public class GameplayUI : MonoBehaviour
         }
     }
 
-    void UpdateUI()
+    public void UpdateUI()
     {
         batalionQty1.text = gameplayManager.batalionCounts[0].ToString();
         batalionQty2.text = gameplayManager.batalionCounts[1].ToString();
@@ -167,6 +192,7 @@ public class GameplayUI : MonoBehaviour
     {
 
         StartCoroutine(SpawnBattalion(target, type));
+        tutorialBatalionSpawned?.Invoke();
         UpdateUI();
     }
 
@@ -182,7 +208,10 @@ public class GameplayUI : MonoBehaviour
 
     private void DoNextWave()
     {
-        // TODO Here is next wave entry point
+        //TODO Add sound
+        gameplayManager.NextWave();
+        tutorialNextWave?.Invoke();
+        UpdateUI();
     }
 
     private IEnumerator SpawnBattalion(Vector3 target, int type)

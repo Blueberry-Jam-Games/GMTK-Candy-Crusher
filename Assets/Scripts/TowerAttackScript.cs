@@ -15,28 +15,31 @@ public class TowerAttackScript : BlockingObject
     public Turret turret;
     
     private float fireRate;
-    private float damageDone;
+    public float damageDone;
     private float nextFire = 0.0f;
 
     [SerializeField]
     public GameObject bullet;
     [SerializeField]
-    private int maxTargets;
+    public int maxTargets;
 
     [SerializeField]
-    private float sprinklesFireRate = 1.0f;
+    public float sprinklesFireRate = 1.0f;
     [SerializeField]
-    private float sprinklesDamageDone = 5.0f;
+    public float sprinklesDamageDone = 5.0f;
 
     [SerializeField]
-    private float peppermintFireRate = 0.5f;
+    public float peppermintFireRate = 0.5f;
     [SerializeField]
-    private float peppermintDamageDone = 7.5f;
+    public float peppermintDamageDone = 7.5f;
 
     [SerializeField]
-    private float laserFireRate = 2.5f;
+    public float laserFireRate = 2.5f;
     [SerializeField]
-    private float laserDamageDone = 15.0f;
+    public float laserDamageDone = 15.0f;
+
+    [SerializeField]
+    public int ammo;
 
     Dictionary<int, bool> playerTracking;
 
@@ -46,20 +49,26 @@ public class TowerAttackScript : BlockingObject
         {
             fireRate = sprinklesFireRate;
             damageDone = sprinklesDamageDone;
+            ammo = 5;
         }
         else if (attackState == TowerType.PEPPERMINT)
         {
             fireRate = peppermintFireRate;
             damageDone = peppermintDamageDone;
+            ammo = 4;
         }
         else if (attackState == TowerType.LASER)
         {
             fireRate = laserFireRate;
             damageDone = laserDamageDone;
+            ammo = 3;
+        }
+        else
+        {
+            fireRate = 0.1f;
         }
 
         playerTracking = new Dictionary<int, bool>();
-        ammo = 5;
         turret = GetComponentInChildren<Turret>();
     }
 
@@ -83,8 +92,6 @@ public class TowerAttackScript : BlockingObject
             playerTracking.Remove(i);
         }
     }
-
-    private int ammo;
 
     public void ReloadAmmo(int reloadQty)
     {
@@ -113,17 +120,34 @@ public class TowerAttackScript : BlockingObject
             if(playerTracking.ContainsKey(player.id))
             {
                 playerTracking[player.id] = true;
-                if (Time.time > nextFire && ammo > 0 && attackState != TowerType.FROSTING)
+                if (Time.time > nextFire && ammo > 0)
                 {
-                    nextFire = Time.time + fireRate;
-                    Projectile rocket = Instantiate(bullet, transform.position, transform.rotation).GetComponent<Projectile>();
+                    if(attackState != TowerType.FROSTING)
+                    {
+                        nextFire = Time.time + fireRate;
 
-                    rocket.velocity = collision.transform.position - turret.transform.position;
+                        if(turret.particles != true)
+                        {
+                            Projectile rocket = Instantiate(bullet, turret.transform.position, transform.rotation).GetComponent<Projectile>();
+                            rocket.velocity = collision.transform.position - turret.transform.position;
+                        }
+                        else
+                        {
+                            turret.gun.time = 0;
+                            turret.gun.Play();
+                        }
 
-                    //Debug.Log("Name: " + collision.gameObject.name + " health: " + player.healthPoints);
-                    // do damage
-                    player.DoDamage(damageDone);
-                    ammo--;
+                        //Debug.Log("Name: " + collision.gameObject.name + " health: " + player.healthPoints);
+                        // do damage
+                        player.DoDamage(damageDone);
+                        ammo--;
+                    }
+                    else
+                    {
+                        nextFire = Time.time + fireRate;
+                        turret.gun.time = 0;
+                        turret.gun.Play();
+                    }
                 }
 
                 //Aim at stuff
@@ -132,6 +156,8 @@ public class TowerAttackScript : BlockingObject
                 Quaternion aim = Quaternion.LookRotation(targetPosition - turret.transform.position);
 
                 turret.transform.rotation = aim;
+
+                turret.pointAtTarget(collision.gameObject.transform.position);
             }
         }
     }
@@ -264,10 +290,11 @@ public class TowerAttackScript : BlockingObject
             if(roof != null)
             {
                 BoxCollider topCollider = roof.AddComponent<BoxCollider>();
-                topCollider.size = Vector3.one * 2;
-                Vector3 adjust = new Vector3(1F, 0, 1F);
+                topCollider.size = Vector3.one;
+                Vector3 adjust = new Vector3(0.5F, 0, 0.5F);
                 topCollider.center = topCollider.center - adjust;
             }
+            
         }
     }
 
