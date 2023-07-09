@@ -85,12 +85,12 @@ public class MediumPlayer : MonoBehaviour
             direction.x = (targetPosition.x - x);
             direction.y = targetPosition.y - y;
 
-            Debug.Log("Got direction feedback " + targetPosition);
+            // Debug.Log("Got direction feedback " + targetPosition);
             string animation = string.Empty;
             localRenderer.flipX = false;
             if(direction.y > 0)
             {
-                Debug.Log("Y > 0 backwards");
+                // Debug.Log("Y > 0 backwards");
                 if(state == PlayerType.LARGE)
                 {
                     animation = "JawbreakerWalkBackward";
@@ -102,8 +102,7 @@ public class MediumPlayer : MonoBehaviour
             }
             else if(direction.y < 0)
             {
-                Debug.Log("Y < 0 Forwards");
-
+                // Debug.Log("Y < 0 Forwards");
                 if(state == PlayerType.LARGE)
                 {
                     animation = "JawbreakerWalkForward";
@@ -115,8 +114,7 @@ public class MediumPlayer : MonoBehaviour
             }
             else if(direction.x > 0)
             {
-                Debug.Log("X > 0 right");
-
+                // Debug.Log("X > 0 right");
                 if(state == PlayerType.LARGE)
                 {
                     animation = "JawbreakerWalkRight";
@@ -128,8 +126,7 @@ public class MediumPlayer : MonoBehaviour
             }
             else if(direction.x < 0)
             {
-                Debug.Log("X < 0 left");
-
+                // Debug.Log("X < 0 left");
                 localRenderer.flipX = true;
                 if(state == PlayerType.LARGE)
                 {
@@ -142,7 +139,7 @@ public class MediumPlayer : MonoBehaviour
             }
             else
             {
-                Debug.Log("XY = 0 Default");
+                // Debug.Log("XY = 0 Default");
                 if(state == PlayerType.LARGE)
                 {
                     animation = "DefaultJawbreaker";
@@ -153,18 +150,18 @@ public class MediumPlayer : MonoBehaviour
                 }
             }
             
-            Debug.Log($"Current Anim {currentAnimation} new anim {animation} deciding");
+            // Debug.Log($"Current Anim {currentAnimation} new anim {animation} deciding");
 
             if(animation != currentAnimation)
             {
-                Debug.Log("Change Animation");
+                // Debug.Log("Change Animation");
                 int frameOffset = (Time.frameCount % 40);
                 float animationOffset = frameOffset / 40;
+                animationOffset += UnityEngine.Random.Range(0f, 1f/60f) % 1f;
                 animator.Play(animation, -1, animationOffset);
                 currentAnimation = animation;
             }
         }
-
 
         Vector3 tempPos = transform.position;
         if (direction.x != 0)
