@@ -12,19 +12,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faafab5969ba2a44eaa7338081ea0c0d, type: 3}
   m_Name: TowerReference
   m_EditorClassIdentifier: 
-  sprinklesRoof1x1: {fileID: 0}
+  sprinklesRoof1x1: {fileID: 919132149155446097, guid: 9850d8b50a01223459604c5a651cac74,
+    type: 3}
   peppermintRoof1x1: {fileID: 919132149155446097, guid: d5dde72aad2deb84293cdc80108a6b9a,
     type: 3}
-  laserRoof1x1: {fileID: 0}
-  frostingRoof1x1: {fileID: 0}
-  sprinklesRoof2x2: {fileID: 0}
-  peppermintRoof2x2: {fileID: 0}
-  laserRoof2x2: {fileID: 0}
-  frostingRoof2x2: {fileID: 0}
+  laserRoof1x1: {fileID: 919132149155446097, guid: 85d4636cafa6484409290751e8d59fe5,
+    type: 3}
+  frostingRoof1x1: {fileID: 919132149155446097, guid: 348640e494c2690408f51bc05ef2e9fe,
+    type: 3}
+  sprinklesRoof2x2: {fileID: 919132149155446097, guid: b1cf247a6e253254299aba514a4908de,
+    type: 3}
+  peppermintRoof2x2: {fileID: 919132149155446097, guid: f09e1742ff00e6a44af33e4ed5f1aa30,
+    type: 3}
+  laserRoof2x2: {fileID: 919132149155446097, guid: fb6281f3fc83bbe47b29f05c0153ba12,
+    type: 3}
+  frostingRoof2x2: {fileID: 919132149155446097, guid: 4dba4e1bb5f00f347a8b908b60ee6641,
+    type: 3}
   base1x1: {fileID: 919132149155446097, guid: 812ca9a81e6dec64692f8472c962935d, type: 3}
-  base2x2: {fileID: 0}
+  base2x2: {fileID: 919132149155446097, guid: 22d34d4a5ff14104394afef5c1dab883, type: 3}
   segment1x1: {fileID: 919132149155446097, guid: 61e91eda856b1e24e90473268203991a,
     type: 3}
-  segment2x2: {fileID: 0}
-  siding1x1: []
-  siding2x2: []
+  segment2x2: {fileID: 919132149155446097, guid: 92bab0d83c23e2040bd5a788b2520670,
+    type: 3}
+  siding1x1:
+  - {fileID: 919132149155446097, guid: 44886acabc61a1440a9649f7e0a93074, type: 3}
+  - {fileID: 919132149155446097, guid: 3716b9c5558b30f448fea9b2cf6bc38d, type: 3}
+  - {fileID: 919132149155446097, guid: 1ad22f1834d7e9f419b55d5c8b5e75e8, type: 3}
+  - {fileID: 919132149155446097, guid: 77d6e73299f23004bb7960347ac23d9c, type: 3}
+  - {fileID: 919132149155446097, guid: a5fd31aba4fd36b4ca42c7eef367f69c, type: 3}
+  siding2x2:
+  - {fileID: 919132149155446097, guid: 4a6ee6d54931e1f42add9dcf9573d651, type: 3}
+  - {fileID: 919132149155446097, guid: 1db56d3d3f2dc884f88cac87f82edca2, type: 3}
+  - {fileID: 919132149155446097, guid: c011658840b8008439b89d8b2a2b6bb4, type: 3}
+  - {fileID: 919132149155446097, guid: 24ffb688cb8bdef4bbd9d64014f2f71e, type: 3}
+  - {fileID: 919132149155446097, guid: ac5ca5dde8c41b54fae5081ad43ce06f, type: 3}
