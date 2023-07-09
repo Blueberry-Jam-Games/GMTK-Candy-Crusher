@@ -46,16 +46,19 @@ public class TowerAttackScript : BlockingObject
         {
             fireRate = sprinklesFireRate;
             damageDone = sprinklesDamageDone;
+            ammo = 5;
         }
         else if (attackState == TowerType.PEPPERMINT)
         {
             fireRate = peppermintFireRate;
             damageDone = peppermintDamageDone;
+            ammo = 4;
         }
         else if (attackState == TowerType.LASER)
         {
             fireRate = laserFireRate;
             damageDone = laserDamageDone;
+            ammo = 3;
         }
         else
         {
@@ -63,7 +66,6 @@ public class TowerAttackScript : BlockingObject
         }
 
         playerTracking = new Dictionary<int, bool>();
-        ammo = 5;
         turret = GetComponentInChildren<Turret>();
     }
 
