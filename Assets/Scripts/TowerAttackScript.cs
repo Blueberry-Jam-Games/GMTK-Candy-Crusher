@@ -21,12 +21,12 @@ public class TowerAttackScript : BlockingObject
     [SerializeField]
     public GameObject bullet;
     [SerializeField]
-    private int maxTargets;
+    public int maxTargets;
 
     [SerializeField]
-    private float sprinklesFireRate = 1.0f;
+    public float sprinklesFireRate = 1.0f;
     [SerializeField]
-    private float sprinklesDamageDone = 5.0f;
+    public float sprinklesDamageDone = 5.0f;
 
     [SerializeField]
     private float peppermintFireRate = 0.5f;
@@ -39,7 +39,7 @@ public class TowerAttackScript : BlockingObject
     private float laserDamageDone = 15.0f;
 
     [SerializeField]
-    private int ammo;
+    public int ammo;
 
     Dictionary<int, bool> playerTracking;
 

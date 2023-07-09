@@ -17495,26 +17495,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - reloads:
-    - target: {fileID: 1524904473}
-      reloadQuantity: 2
-    - target: {fileID: 1856934754}
-      reloadQuantity: 2
-    - target: {fileID: 1828154107}
-      reloadQuantity: 2
-    - target: {fileID: 1505822496}
-      reloadQuantity: 2
-    - target: {fileID: 1108410782}
-      reloadQuantity: 2
-    - target: {fileID: 1075720504}
-      reloadQuantity: 2
-    - target: {fileID: 1613411625}
-      reloadQuantity: 2
-    batalionReloads: 000000000000000001000000
+  - batalionReloads: 000000000000000001000000
     rocketReloads: 0
   currentWave: 0
   batalionCounts: 020000000000000000000000
   availableRockets: 1
+  towers: []
+  sprinklesReload: 0
+  peppermintReload: 0
+  laserReload: 0
 --- !u!4 &583874311
 Transform:
   m_ObjectHideFlags: 0
@@ -29118,18 +29107,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1075720502}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1075720504 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6223893667729424909, guid: 85b38ab20c2e64444bb5257be714a15b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1075720502}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8412de99563fc4ca0b672eeb44e8a029, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1095808916
 GameObject:
   m_ObjectHideFlags: 0
@@ -29457,18 +29434,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1103509028}
   m_Mesh: {fileID: -1388485733357891733, guid: 812ca9a81e6dec64692f8472c962935d, type: 3}
---- !u!114 &1108410782 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6223893667729424909, guid: 85b38ab20c2e64444bb5257be714a15b,
-    type: 3}
-  m_PrefabInstance: {fileID: 631954690}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8412de99563fc4ca0b672eeb44e8a029, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1132489926
 GameObject:
   m_ObjectHideFlags: 0
@@ -45820,18 +45785,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1605173947}
   m_Mesh: {fileID: -1388485733357891733, guid: 812ca9a81e6dec64692f8472c962935d, type: 3}
---- !u!114 &1613411625 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6223893667729424909, guid: 85b38ab20c2e64444bb5257be714a15b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1163099886}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8412de99563fc4ca0b672eeb44e8a029, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1619747410
 GameObject:
   m_ObjectHideFlags: 0
@@ -51531,18 +51484,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &1828154107 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6223893667729424909, guid: 9351d83a519aebc4685edcfb75481d65,
-    type: 3}
-  m_PrefabInstance: {fileID: 410238283}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8412de99563fc4ca0b672eeb44e8a029, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1833756412
 GameObject:
   m_ObjectHideFlags: 0
@@ -51702,18 +51643,6 @@ RectTransform:
   m_AnchoredPosition: {x: 150, y: -260}
   m_SizeDelta: {x: 87.47, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1856934754 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6223893667729424909, guid: 9351d83a519aebc4685edcfb75481d65,
-    type: 3}
-  m_PrefabInstance: {fileID: 693483762}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8412de99563fc4ca0b672eeb44e8a029, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1858032978
 GameObject:
   m_ObjectHideFlags: 0
@@ -51898,6 +51827,8 @@ MonoBehaviour:
   portrait: {fileID: 298445128}
   mouse: {fileID: 966814419}
   ui: {fileID: 1544816139}
+  godtower: {fileID: 1524904473}
+  godtower2: {fileID: 1505822496}
 --- !u!1 &1867926244
 GameObject:
   m_ObjectHideFlags: 0

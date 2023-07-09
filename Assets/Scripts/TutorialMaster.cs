@@ -26,11 +26,19 @@ public class TutorialMaster : MonoBehaviour
     [Header("External but in scene")]
     public GameplayUI ui;
     private GameplayManager gm;
+    public TowerAttackScript godtower;
+    public TowerAttackScript godtower2;
 
     int state = 0;
 
     void Start()
     {
+        godtower.ReloadAmmo(500);
+        godtower.maxTargets = 20;
+        godtower.sprinklesFireRate = 0.25f;
+        godtower2.ReloadAmmo(500);
+        godtower2.maxTargets = 20;
+        godtower2.sprinklesFireRate = 0.25f;
         light1.SetActive(false);
         light2.SetActive(false);
         gm = GameObject.FindWithTag("GameController").GetComponent<GameplayManager>();
@@ -206,6 +214,11 @@ public class TutorialMaster : MonoBehaviour
     {
         Debug.Log("Reenforcement pressed");
         ui.tutorialNextWave -= ReenfocementsPressed;
+
+        godtower.sprinklesFireRate = 5f;
+        godtower.sprinklesDamageDone = 1f;
+        godtower2.sprinklesFireRate = 5f;
+        godtower2.sprinklesDamageDone = 1f;
 
         ReinforcementsArrived();
     }
