@@ -39,7 +39,7 @@ public class GameplayManager : MonoBehaviour
         {
             if(GameObject.FindGameObjectsWithTag("Soldier").Length == 0)
             {
-                if(currentWave + 1 >= waves.Count)
+                if(currentWave > waves.Count)
                 {
                     LevelLoader gameOver = FindObjectOfType<LevelLoader>();
                     StartCoroutine(gameOver.LoadLevel("GameOver"));
