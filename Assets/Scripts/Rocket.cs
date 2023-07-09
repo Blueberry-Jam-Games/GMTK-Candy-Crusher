@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
+    public GameObject explosion;
     private Rigidbody rb;
     public delegate void OnRocketLand();
 
@@ -28,6 +29,7 @@ public class Rocket : MonoBehaviour
         Debug.Log($"Name: {hit.gameObject.name}");
         if(hit.gameObject.transform.parent.gameObject.CompareTag("Tower"))
         {
+            Object.Instantiate(explosion, transform.position, Quaternion.Euler(0, 0, 0));
             hit.gameObject.transform.parent.gameObject.GetComponent<TowerAttackScript>().destroyMe();
             Destroy(hit.gameObject.transform.parent.gameObject);
             Destroy(this.gameObject);
