@@ -11,6 +11,8 @@ public class TowerAttackScript : BlockingObject
     public int floorCount = 1;
 
     public ModelReferences towerPieces;
+
+    public Turret turret;
     
     private float fireRate;
     private float damageDone;
@@ -58,6 +60,7 @@ public class TowerAttackScript : BlockingObject
 
         playerTracking = new Dictionary<int, bool>();
         ammo = 5;
+        turret = GetComponentInChildren<Turret>();
     }
 
     private void FixedUpdate()
@@ -115,12 +118,20 @@ public class TowerAttackScript : BlockingObject
                     nextFire = Time.time + fireRate;
                     Projectile rocket = Instantiate(bullet, transform.position, transform.rotation).GetComponent<Projectile>();
 
-                    rocket.velocity = collision.transform.position - transform.position;
+                    rocket.velocity = collision.transform.position - turret.transform.position;
+
                     //Debug.Log("Name: " + collision.gameObject.name + " health: " + player.healthPoints);
                     // do damage
                     player.DoDamage(damageDone);
                     ammo--;
                 }
+
+                //Aim at stuff
+                Vector3 targetPosition = collision.transform.position;
+                targetPosition.y = turret.transform.position.y;
+                Quaternion aim = Quaternion.LookRotation(targetPosition - turret.transform.position);
+
+                turret.transform.rotation = aim;
             }
         }
     }

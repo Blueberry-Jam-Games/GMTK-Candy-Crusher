@@ -7,11 +7,6 @@ public class Tooltip : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI tooltipText;
-    [SerializeField]
-    private RectTransform background;
-
-    [SerializeField]
-    private float textPaddingSize = 4;
     private GameObject owner;
 
     private static Tooltip Instance;
@@ -46,8 +41,6 @@ public class Tooltip : MonoBehaviour
         transform.position = position;
 
         tooltipText.text = tooltipString;
-        Vector2 backgroundSize = new Vector2(tooltipText.preferredWidth + 2 * textPaddingSize, tooltipText.preferredHeight + 2 * textPaddingSize);
-        background.sizeDelta = backgroundSize;
     }
 
     private void HideTooltip()
