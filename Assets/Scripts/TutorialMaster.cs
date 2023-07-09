@@ -45,10 +45,10 @@ public class TutorialMaster : MonoBehaviour
         for(int i = 0; i < towers.Length; i++)
         {
             TowerAttackScript current = towers[i].GetComponent<TowerAttackScript>();
-            current.sprinklesFireRate = 0.25f;
-            current.peppermintFireRate = 0.25f;
-            current.laserFireRate = 0.5f;
-            current.ammo = 1000;
+            current.sprinklesFireRate = 0.125f;
+            current.peppermintFireRate = 0.125f;
+            current.laserFireRate = 0.25f;
+            current.ammo = 1000000;
         }
     }
 
