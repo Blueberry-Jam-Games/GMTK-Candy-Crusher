@@ -59,6 +59,11 @@ public class TowerAttackScript : BlockingObject
 
     void OnTriggerStay(Collider collision)
     {
+        ammo += reloadQty;
+    }
+
+    void OnTriggerStay(Collider collision)
+    {
         
         if (collision.gameObject.CompareTag("Soldier"))
         {
