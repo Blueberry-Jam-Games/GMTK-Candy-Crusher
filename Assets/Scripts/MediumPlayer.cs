@@ -21,6 +21,10 @@ public class MediumPlayer : MonoBehaviour
 
     public static int GLOBAL_ID = 0;
 
+    private Animator animator;
+    public SpriteRenderer localRenderer;
+    private string currentAnimation = string.Empty;
+
     void Start()
     {
         towerGrid = GameObject.FindGameObjectWithTag("TowerGrid").GetComponent<TowerGrid>();
@@ -35,17 +39,27 @@ public class MediumPlayer : MonoBehaviour
 
         transform.position = tempPos;
 
+        localRenderer.sharedMaterial = new Material(localRenderer.sharedMaterial);
+        this.animator = GetComponent<Animator>();
+
         if (state == PlayerType.LARGE)
         {
             modifier = 0.01f;
+            animator.Play("DefaultJawbreaker");
+            currentAnimation = "DefaultJawbreaker";
         }
         else if (state == PlayerType.MEDIUM)
         {
             modifier = 0.02f;
+            localRenderer.sharedMaterial.SetFloat("_HueShift", 0f);
+            animator.Play("Default");
+            currentAnimation = "Default";
         }
-        else
+        else if (state == PlayerType.SMALL)
         {
             modifier = 0.05f;
+            localRenderer.sharedMaterial.SetFloat("_HueShift", 210f);
+            animator.Play("Default");
         }
 
         this.id = GLOBAL_ID++;
@@ -70,8 +84,84 @@ public class MediumPlayer : MonoBehaviour
 
             direction.x = (targetPosition.x - x);
             direction.y = targetPosition.y - y;
-        }
 
+            // Debug.Log("Got direction feedback " + targetPosition);
+            string animation = string.Empty;
+            localRenderer.flipX = false;
+            if(direction.y > 0)
+            {
+                // Debug.Log("Y > 0 backwards");
+                if(state == PlayerType.LARGE)
+                {
+                    animation = "JawbreakerWalkBackward";
+                }
+                else
+                {
+                    animation = "DefaultWalkBack"; 
+                }
+            }
+            else if(direction.y < 0)
+            {
+                // Debug.Log("Y < 0 Forwards");
+                if(state == PlayerType.LARGE)
+                {
+                    animation = "JawbreakerWalkForward";
+                }
+                else
+                {
+                    animation = "DefaultWalkForward"; 
+                }
+            }
+            else if(direction.x > 0)
+            {
+                // Debug.Log("X > 0 right");
+                if(state == PlayerType.LARGE)
+                {
+                    animation = "JawbreakerWalkRight";
+                }
+                else
+                {
+                    animation = "DefaultWalkRight"; 
+                }
+            }
+            else if(direction.x < 0)
+            {
+                // Debug.Log("X < 0 left");
+                localRenderer.flipX = true;
+                if(state == PlayerType.LARGE)
+                {
+                    animation = "JawbreakerWalkRight";
+                }
+                else
+                {
+                    animation = "DefaultWalkRight"; 
+                }
+            }
+            else
+            {
+                // Debug.Log("XY = 0 Default");
+                if(state == PlayerType.LARGE)
+                {
+                    animation = "DefaultJawbreaker";
+                }
+                else
+                {
+                    animation = "Default"; 
+                }
+            }
+            
+            // Debug.Log($"Current Anim {currentAnimation} new anim {animation} deciding");
+
+            if(animation != currentAnimation)
+            {
+                // Debug.Log("Change Animation");
+                int frameOffset = (Time.frameCount % 40);
+                float animationOffset = frameOffset / 40;
+                animationOffset += UnityEngine.Random.Range(0f, 1f/60f) % 1f;
+                animator.Play(animation, -1, animationOffset);
+                currentAnimation = animation;
+            }
+        }
 
         Vector3 tempPos = transform.position;
         if (direction.x != 0)
@@ -83,7 +173,15 @@ public class MediumPlayer : MonoBehaviour
             tempPos.z += direction.y * modifier;
         }
 
+        float height = Terrain.activeTerrain.SampleHeight(new Vector3(tempPos.x, 0, tempPos.z)) + 0.5f;
+        tempPos.y = height;
+
         transform.position = tempPos;
+    }
+
+    public int Sign(float f)
+    {
+        return f == 0 ? 0 : (f < 0) ? -1 : 1;
     }
 
     public void DoDamage(float ammount)
