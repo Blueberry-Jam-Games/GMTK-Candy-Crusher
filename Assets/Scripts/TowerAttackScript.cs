@@ -98,7 +98,7 @@ public class TowerAttackScript : BlockingObject
 
     public override void UpdateGeometry()
     {
-        float segmentHeight = 0.57F;
+        
         //Destroy child objects to prep for rebuild
         for (int i = this.transform.childCount; i > 0; --i)
         {
@@ -110,24 +110,28 @@ public class TowerAttackScript : BlockingObject
         //1x1
         if (width == 1 && height == 1)
         {
+            Vector3 gridAlignment = new Vector3(0.5F, 0, 0.5F);
+            float segmentHeight = 0.57F;
             Quaternion forward = new Quaternion();
             forward = Quaternion.Euler(0, 0, 0);
 
             Quaternion segmentForward = new Quaternion();
             segmentForward = Quaternion.Euler(-90, 0, 0);
 
-            Instantiate(towerPieces.base1x1, this.transform);
+            Instantiate(towerPieces.base1x1, basePosition + gridAlignment, segmentForward, this.transform);
 
             for(int i = 0; i < floorCount; i++)
             {
                 Vector3 position = new Vector3(0, 0.1F + (i * segmentHeight), 0);
-                Instantiate(towerPieces.segment1x1, position + basePosition, segmentForward, this.transform);
+                Instantiate(towerPieces.segment1x1, position + basePosition + gridAlignment, segmentForward, this.transform);
+
                 GameObject pickedWrap = towerPieces.siding1x1[Random.Range(0, towerPieces.siding1x1.Count)];
-                Instantiate(pickedWrap, position + basePosition, segmentForward, this.transform);
+                Vector3 detailOffset = new Vector3(0.507859F, 0, 0.516459F);
+                Instantiate(pickedWrap, position + basePosition - detailOffset + gridAlignment, segmentForward, this.transform);
             }
 
             Vector3 roofPosition = new Vector3(0, 0.1F + floorCount * segmentHeight);
-            roofPosition += basePosition;
+            roofPosition += basePosition + gridAlignment;
 
             GameObject roof = null;
 
@@ -144,6 +148,46 @@ public class TowerAttackScript : BlockingObject
             {
                 BoxCollider topCollider = roof.AddComponent<BoxCollider>();
                 topCollider.size = Vector3.one;
+            }
+            else if (attackState == TowerType.LASER)
+            {
+                Instantiate(towerPieces.laserRoof1x1, roofPosition, forward, this.transform);
+            }
+        }
+        else if(width == 2 && height == 2)
+        {
+            Vector3 gridAlignment = new Vector3(1.5F, 0, 1.5F);
+            float segmentHeight = 0.855F;
+            Quaternion forward = new Quaternion();
+            forward = Quaternion.Euler(0, 0, 0);
+
+            Quaternion segmentForward = new Quaternion();
+            segmentForward = Quaternion.Euler(-90, 0, 0);
+
+            Instantiate(towerPieces.base2x2,  basePosition + gridAlignment, segmentForward, this.transform);
+
+            for(int i = 0; i < floorCount; i++)
+            {
+                Vector3 position = new Vector3(0, 0.15F + (i * segmentHeight), 0);
+                Instantiate(towerPieces.segment2x2, position + basePosition + gridAlignment, segmentForward, this.transform);
+                GameObject pickedWrap = towerPieces.siding2x2[Random.Range(0, towerPieces.siding2x2.Count)];
+                Instantiate(pickedWrap, position + basePosition + gridAlignment, segmentForward, this.transform);
+            }
+
+            Vector3 roofPosition = new Vector3(0, 0.15F + floorCount * segmentHeight);
+            roofPosition += basePosition + gridAlignment;
+
+            if (attackState == TowerType.PEPPERMINT)
+            {
+                Instantiate(towerPieces.peppermintRoof2x2, roofPosition, forward, this.transform);
+            }
+            else if (attackState == TowerType.SPRINKLES)
+            {
+                Instantiate(towerPieces.sprinklesRoof2x2, roofPosition, forward, this.transform);
+            }
+            else if (attackState == TowerType.LASER)
+            {
+                Instantiate(towerPieces.laserRoof2x2, roofPosition, forward, this.transform);
             }
         }
     }
