@@ -70,12 +70,6 @@ MonoBehaviour:
     mixerGroup: {fileID: 2910003261292617420, guid: 26987a92abec43a4780c781176c9e741,
       type: 2}
     source: {fileID: 0}
-  - name: jawbreakerhit
-    clip: {fileID: 8300000, guid: 90b7d7ea2c633c8489ee17a1f5f9def4, type: 3}
-    volume: 1
-    mixerGroup: {fileID: 2910003261292617420, guid: 26987a92abec43a4780c781176c9e741,
-      type: 2}
-    source: {fileID: 0}
   - name: bluehit
     clip: {fileID: 8300000, guid: e7b882cb70963ff42ac8bdf328525b72, type: 3}
     volume: 1
@@ -84,6 +78,18 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: redhit
     clip: {fileID: 8300000, guid: 70a24813fec52774a9ce96a4a3cbdb1a, type: 3}
+    volume: 1
+    mixerGroup: {fileID: 2910003261292617420, guid: 26987a92abec43a4780c781176c9e741,
+      type: 2}
+    source: {fileID: 0}
+  - name: click
+    clip: {fileID: 8300000, guid: 18187af3ec4bd0240bbd6a79aab926f3, type: 3}
+    volume: 1
+    mixerGroup: {fileID: -5610635786863958869, guid: 26987a92abec43a4780c781176c9e741,
+      type: 2}
+    source: {fileID: 0}
+  - name: readygo
+    clip: {fileID: 8300000, guid: a35c41babb53ed54ebe4196008f2c7a7, type: 3}
     volume: 1
     mixerGroup: {fileID: 2910003261292617420, guid: 26987a92abec43a4780c781176c9e741,
       type: 2}

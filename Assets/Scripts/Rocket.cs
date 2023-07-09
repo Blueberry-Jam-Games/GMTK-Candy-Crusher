@@ -9,7 +9,6 @@ public class Rocket : MonoBehaviour
     public delegate void OnRocketLand();
 
     public AudioSource launch;
-    public AudioSource land;
 
     private void Start()
     {
@@ -38,8 +37,6 @@ public class Rocket : MonoBehaviour
             Destroy(hit.gameObject.transform.parent.gameObject);
         }
         Destroy(this.gameObject);
-
-        land.Play();
         
         /*Collider[] destroyCheck = Physics.OverlapSphere(new Vector3(transform.position.x, 0, transform.position.y), 0.5F);
         List<GameObject> markedForDestroy = new List<GameObject>();
