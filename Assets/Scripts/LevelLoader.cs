@@ -8,18 +8,29 @@ public class LevelLoader : MonoBehaviour
 {
     public Animator transition;
 
-    public void StartGame()
+    private bool enterPressed;
+
+    void Start()
     {
-        Debug.Log("Hello");
-        StartCoroutine(LoadLevel("GrayboxTestQuinnConnor"));
+        enterPressed = true;
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return) && enterPressed && SceneManager.GetActiveScene().name == "TitleScreen")
+        {
+            Debug.Log("Code playing");
+            enterPressed = false;
+            StartCoroutine(LoadLevel("GrayboxTestQuinnConnor"));
+        }
     }
 
     IEnumerator LoadLevel(string scene)
     {
-        transition.SetTrigger("Start");
-
-        yield return new WaitForSeconds(1);
-
-        SceneManager.LoadScene(scene);
+        transition.Play("ingerRunningg");
+        yield return new WaitForSeconds(0.7f);
+        SceneManager.LoadSceneAsync(scene);
+        yield return new WaitForSeconds(0.6f);
+        // //
     }
 }
