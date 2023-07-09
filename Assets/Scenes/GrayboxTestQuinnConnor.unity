@@ -5126,18 +5126,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 32482244}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &32482246 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6223893667729424909, guid: 9351d83a519aebc4685edcfb75481d65,
-    type: 3}
-  m_PrefabInstance: {fileID: 32482244}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8412de99563fc4ca0b672eeb44e8a029, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &44817963
 GameObject:
   m_ObjectHideFlags: 0
@@ -12106,18 +12094,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 336559897}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &336559899 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6223893667729424909, guid: 9351d83a519aebc4685edcfb75481d65,
-    type: 3}
-  m_PrefabInstance: {fileID: 336559897}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8412de99563fc4ca0b672eeb44e8a029, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &341341238
 GameObject:
   m_ObjectHideFlags: 0
@@ -12148,20 +12124,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - reloads:
-    - target: {fileID: 32482246}
-      reloadQuantity: 2
-    - target: {fileID: 336559899}
-      reloadQuantity: 3
-    - target: {fileID: 354428148}
-      reloadQuantity: 2
-    - target: {fileID: 381210776}
-      reloadQuantity: 3
-    batalionReloads: 030000000300000003000000
-    rocketReloads: 5
+  - batalionReloads: 030000000300000003000000
+    rocketReloads: 2
+  - batalionReloads: 010000000100000001000000
+    rocketReloads: 2
   currentWave: 0
   batalionCounts: 050000000500000005000000
   availableRockets: 5
+  towers: []
+  sprinklesReload: 0
+  peppermintReload: 0
+  laserReload: 0
 --- !u!4 &341341240
 Transform:
   m_ObjectHideFlags: 0
@@ -12277,18 +12250,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 354428146}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &354428148 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6223893667729424909, guid: 9351d83a519aebc4685edcfb75481d65,
-    type: 3}
-  m_PrefabInstance: {fileID: 354428146}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8412de99563fc4ca0b672eeb44e8a029, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &355083559
 GameObject:
   m_ObjectHideFlags: 0
@@ -12523,18 +12484,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 381210774}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &381210776 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6223893667729424909, guid: 85b38ab20c2e64444bb5257be714a15b,
-    type: 3}
-  m_PrefabInstance: {fileID: 381210774}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8412de99563fc4ca0b672eeb44e8a029, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &391544289
 GameObject:
   m_ObjectHideFlags: 0
