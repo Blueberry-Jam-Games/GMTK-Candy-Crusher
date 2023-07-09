@@ -287,8 +287,8 @@ public class TowerAttackScript : BlockingObject
             if(roof != null)
             {
                 BoxCollider topCollider = roof.AddComponent<BoxCollider>();
-                topCollider.size = Vector3.one * 2;
-                Vector3 adjust = new Vector3(1F, 0, 1F);
+                topCollider.size = Vector3.one;
+                Vector3 adjust = new Vector3(0.5F, 0, 0.5F);
                 topCollider.center = topCollider.center - adjust;
             }
         }

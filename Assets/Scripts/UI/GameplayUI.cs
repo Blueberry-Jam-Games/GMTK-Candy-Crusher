@@ -182,7 +182,9 @@ public class GameplayUI : MonoBehaviour
 
     private void DoNextWave()
     {
-        // TODO Here is next wave entry point
+        //TODO Add sound
+        gameplayManager.NextWave();
+        UpdateUI();
     }
 
     private IEnumerator SpawnBattalion(Vector3 target, int type)
