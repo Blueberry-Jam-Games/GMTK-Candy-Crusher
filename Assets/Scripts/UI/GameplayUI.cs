@@ -98,6 +98,7 @@ public class GameplayUI : MonoBehaviour
                             gameplayManager.batalionCounts[selectedOption - 1]--;
                             UpdateUI();
                             DoPlayerAction(tempPos, selectedOption);
+                            TowerAudio.Instance.Play("click");
                         }
                     }
                     else if (selectedOption == 4)
@@ -212,6 +213,7 @@ public class GameplayUI : MonoBehaviour
         gameplayManager.NextWave();
         tutorialNextWave?.Invoke();
         UpdateUI();
+        TowerAudio.Instance.Play("readygo");
     }
 
     private IEnumerator SpawnBattalion(Vector3 target, int type)

@@ -66,7 +66,7 @@ public class LevelLoader : MonoBehaviour
     {
         transition.Play("ingerRunningg");
         yield return new WaitForSeconds(0.7f);
-        SceneManager.LoadSceneAsync(scene);
+        SceneManager.LoadScene(scene);
         yield return new WaitForSeconds(0.6f);
         // //
     }
