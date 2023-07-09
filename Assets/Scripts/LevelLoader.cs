@@ -21,11 +21,38 @@ public class LevelLoader : MonoBehaviour
         {
             Debug.Log("Code playing");
             enterPressed = false;
-            StartCoroutine(LoadLevel("GrayboxTestQuinnConnor"));
+            ListScenes gameplay = FindObjectOfType<ListScenes>();
+            gameplay.currentLevel++;
+            StartCoroutine(LoadLevel("TutorialScene"));
         }
     }
 
-    IEnumerator LoadLevel(string scene)
+    public void findNextLevel()
+    {
+        GameObject winScreen = GameObject.FindWithTag("WinScreen");
+        winScreen.GetComponent<Canvas>().enabled = false;
+        ListScenes gameplay = FindObjectOfType<ListScenes>();
+        if (gameplay.levels.Length > gameplay.currentLevel + 1)
+        {
+            gameplay.currentLevel++;
+            StartCoroutine(LoadLevel(gameplay.levels[gameplay.currentLevel]));
+        }
+        else
+        {
+            gameplay.currentLevel = 0;
+        }
+    }
+
+    public void MainMenu()
+    {
+        GameObject winScreen = GameObject.FindWithTag("WinScreen");
+        winScreen.GetComponent<Canvas>().enabled = false;
+        ListScenes gameplay = FindObjectOfType<ListScenes>();
+        gameplay.currentLevel = 0;
+        StartCoroutine(LoadLevel(gameplay.levels[gameplay.currentLevel]));
+    }
+
+    public IEnumerator LoadLevel(string scene)
     {
         transition.Play("ingerRunningg");
         yield return new WaitForSeconds(0.7f);
