@@ -189,7 +189,6 @@ public class TutorialMaster : MonoBehaviour
 
     private IEnumerator MonitorSoldiers2()
     {
-        Debug.LogError("Stacktrace to polling");
         Debug.Log("Monitoring soldiers again");
         yield return new WaitForSeconds(0.2f);
         while(GameObject.FindGameObjectsWithTag("Soldier").Length != 0)
