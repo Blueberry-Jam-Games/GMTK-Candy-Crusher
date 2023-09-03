@@ -122,10 +122,10 @@ public class TutorialMaster : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         while(GameObject.FindGameObjectsWithTag("Soldier").Length != 0)
         {
-            foreach(GameObject go in GameObject.FindGameObjectsWithTag("Soldier"))
+            /*foreach(GameObject go in GameObject.FindGameObjectsWithTag("Soldier"))
             {
                 Debug.Log("Still alive " + go.name);
-            }
+            }*/
             yield return null;
         }
         Debug.Log("All of them are dead");
