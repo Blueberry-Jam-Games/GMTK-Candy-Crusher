@@ -40,10 +40,10 @@ public class TutorialMaster : MonoBehaviour
             "But no more, for it is you, General, who shall retrieve the cookies! Despite their best tower defenses, we shall march!"
         }, BattalionExample));
 
-        
+        StartCoroutine(DoInTwoFrames());
     }
 
-    private IEnumerator DoInToFrames()
+    private IEnumerator DoInTwoFrames()
     {
         yield return null;
         yield return null;
