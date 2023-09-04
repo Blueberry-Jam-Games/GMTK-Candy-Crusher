@@ -8,6 +8,19 @@ public class TutorialMaster : MonoBehaviour
 {
     public delegate void OnComplete();
 
+    [Header("Gingerbread Portraits")]
+    [SerializeField]
+    private Sprite gignerbreadNeutral;
+    [SerializeField]
+    private Sprite gingerbreadHappy;
+    [SerializeField]
+    private Sprite gingerbreadProud;
+    [SerializeField]
+    private Sprite gingerbreadSalute;
+    [SerializeField]
+    private Sprite gingerbreadSmug;
+
+    [Header("Functionality")]
     public GameObject dark1;
     public GameObject dark2;
     public GameObject dark3;
@@ -31,6 +44,7 @@ public class TutorialMaster : MonoBehaviour
 
     void Start()
     {
+        portrait.sprite = gignerbreadNeutral;
         light1.SetActive(false);
         light2.SetActive(false);
         gm = GameObject.FindWithTag("GameController").GetComponent<GameplayManager>();
@@ -84,6 +98,7 @@ public class TutorialMaster : MonoBehaviour
 
     public void BattalionExample()
     {
+        portrait.sprite = gingerbreadSalute;
         dark1.SetActive(false);
         ui.UpdateUI();
         state = 0;
@@ -108,6 +123,7 @@ public class TutorialMaster : MonoBehaviour
 
     public void SpawnComplete()
     {
+        portrait.sprite = gingerbreadProud;
         ui.tutorialBatalionSpawned -= SpawnComplete;
         state = 1;
         text.text = "Now let the troops do their march!";
@@ -134,6 +150,7 @@ public class TutorialMaster : MonoBehaviour
 
     public void TroopsDead()
     {
+        portrait.sprite = gignerbreadNeutral;
         Debug.Log("Troops dead");
         StartCoroutine(DoDialogue(new List<string>(){
             "Blast! Those towers are too good!",
@@ -143,6 +160,7 @@ public class TutorialMaster : MonoBehaviour
 
     public void StartRocket()
     {
+        portrait.sprite = gingerbreadSmug;
         Debug.Log("start Rocket");
         text.text = "Click the rocket icon, then click a tower to destroy.";
         dark1.SetActive(true);
@@ -169,6 +187,7 @@ public class TutorialMaster : MonoBehaviour
 
     public void TowerDestroyed()
     {
+        portrait.sprite = gingerbreadProud;
         Debug.Log("Tower destroyed");
         text.text = "Now send another battalion!";
         gm.batalionCounts[0] = 1;
@@ -201,6 +220,7 @@ public class TutorialMaster : MonoBehaviour
 
     public void SecondBattalionDestroyed()
     {
+        portrait.sprite = gignerbreadNeutral;
         StartCoroutine(DoDialogue(new List<string>(){
             "Darn, still too powerful. But these aren't the only forces you have access to.",
             "Blue soldiers are fast and plentiful, red soldiers are heartier but harder to come by, and stripey soldiers are battle hardened and ready for the front lines.",
@@ -232,6 +252,7 @@ public class TutorialMaster : MonoBehaviour
         Debug.Log("Reenforcements arrived");
         dark3.SetActive(false);
         darkWait.SetActive(true);
+        portrait.sprite = gingerbreadSalute;
         StartCoroutine(DoDialogue(new List<string>(){
             "Waiting for reinforcements is a good way to replenish your troop supply.",
             "But watch out, enemy towers have limited ammo. While you wait for Reinforcements, they can fortify their positions.",
@@ -255,6 +276,7 @@ public class TutorialMaster : MonoBehaviour
     {
         text.transform.parent.gameObject.SetActive(false);
         portrait.gameObject.SetActive(false);
+        portrait.sprite = gignerbreadNeutral;
         //GameObject winScreen = GameObject.FindWithTag("WinScreen");
         //winScreen.GetComponent<Canvas>().enabled = true;
     }
