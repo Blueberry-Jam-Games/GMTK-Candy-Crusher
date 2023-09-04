@@ -30,6 +30,11 @@ public class Rocket : MonoBehaviour
     private void OnCollisionEnter(Collision hit)
     {
         Debug.Log($"Name: {hit.gameObject.name}");
+        if(hit.gameObject == null || hit.gameObject.transform.parent == null)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
         if(hit.gameObject.transform.parent.gameObject.CompareTag("Tower"))
         {
             Object.Instantiate(explosion, transform.position, Quaternion.Euler(0, 0, 0));
