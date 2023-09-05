@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class TowerAudio : MonoBehaviour
 {
@@ -28,8 +29,22 @@ public class TowerAudio : MonoBehaviour
             sound.source.clip = sound.clip;
             sound.source.volume = sound.volume;
             sound.source.outputAudioMixerGroup = sound.mixerGroup;
+            sound.source.playOnAwake = false;
 
             soundCache.Add(sound.name, sound);
+        }
+    }
+
+    private void Start()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "TitleScreen")
+        {
+            Destroy(this.gameObject);
         }
     }
 

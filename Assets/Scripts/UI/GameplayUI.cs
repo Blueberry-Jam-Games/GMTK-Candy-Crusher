@@ -69,7 +69,7 @@ public class GameplayUI : MonoBehaviour
                 activeDecal.transform.position = hit.point + new Vector3(0, 3f, 0);
 
                 DecalProjector decal = activeDecal.GetComponent<DecalProjector>();
-                if (Mathf.Floor(hit.point.z) == 0.0f && gameplayManager.batalionCounts[selectedOption - 1] != 0)
+                if (Mathf.Floor(hit.point.z) == 0.0f && selectedOption - 1 >= 0 && selectedOption - 1 < 3 && gameplayManager.batalionCounts[selectedOption - 1] != 0)
                 {
                     if (decal.material != targetGood)
                     {
