@@ -2,7 +2,7 @@
 
 [Itch.io Link](https://zenith08.itch.io/cookie-crusade)
 
-The theme for the 2023 GMTK Game Jam centered around 'Roles Reversed'. Our game reimagines the strategic fun of tower defense games. Instead of assuming the role of a defender, tasked with defeating incoming armies, players take on the offensive role. In our game, you control gumballs and unleash waves of attacks with the goal of reaching a coveted cookie jar while trying to outsmart the gingerbread inhabitants. Furthermore, the game features a whimsical artistic style inspired by the classic board game Candy Land.
+Cookie Crusade is a Tower Defense game with a twist! You are on the offence, with squadrons of battle-ready gumballs at your disposal. Choose your army and launch waves of attacks to beat the defences of the Gingerbread People!
 
 [![Game Tutorial](http://img.youtube.com/vi/3_lJQreQPQY/0.jpg)](https://www.youtube.com/watch?v=3_lJQreQPQY)
 
