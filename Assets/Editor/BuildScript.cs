@@ -15,6 +15,7 @@ public class BuildScript
             scenePaths[i] = scenes[i].path;
         }
 
+        // A way to statically define what scenes are being built. We don't use it in favour of reading the build settings.
         // string[] scenePaths = new string[]
         // {
         //     "Assets/Scenes/SampleScene.unity"
@@ -24,6 +25,7 @@ public class BuildScript
 
         string buildDir = "";
 
+        // TODO it is an issue that Standalone here is Windows specific
         if (buildTargetGroup == BuildTargetGroup.WebGL)
         {
             buildDir = "./builds";
@@ -58,22 +60,15 @@ public class BuildScript
         }
     }
 
-    // This function will be called from the build process
-    public static void Build()
-    {
-        // Build EmbeddedLinux ARM64 Unity player
-        DoBuild(BuildTargetGroup.WebGL, BuildTarget.WebGL);
-    }
-
     public static void BuildWebGL()
     {
-        // Build EmbeddedLinux ARM64 Unity player
+        // Build WebGL browser player
         DoBuild(BuildTargetGroup.WebGL, BuildTarget.WebGL);
     }
 
     public static void BuildWindows()
     {
-        // Build EmbeddedLinux ARM64 Unity player
+        // Build Windows 64-bit player
         DoBuild(BuildTargetGroup.Standalone, BuildTarget.StandaloneWindows64);
     }
 }
