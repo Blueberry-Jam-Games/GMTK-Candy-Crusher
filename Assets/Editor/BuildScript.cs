@@ -22,10 +22,21 @@ public class BuildScript
 
         Debug.Log("Started we have logs");
 
+        string buildDir = "";
+
+        if (buildTargetGroup == BuildTargetGroup.WebGL)
+        {
+            buildDir = "./builds";
+        }
+        else if (buildTargetGroup == BuildTargetGroup.Standalone)
+        {
+            buildDir = "./builds/game.exe";
+        }
+
         BuildPlayerOptions options = new BuildPlayerOptions
         {
             scenes = scenePaths,
-            locationPathName = "./builds",
+            locationPathName = buildDir,
             target = buildTarget,
             options = BuildOptions.None
         };
