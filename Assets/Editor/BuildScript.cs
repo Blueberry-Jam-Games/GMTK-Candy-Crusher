@@ -4,9 +4,9 @@ using UnityEditor.Build.Reporting;
 
 public class BuildScript
 {
-    private static void BuildWebGL()
+    private static void DoBuild(BuildTargetGroup buildTargetGroup, BuildTarget buildTarget)
     {
-        EditorUserBuildSettings.selectedBuildTargetGroup = BuildTargetGroup.WebGL;
+        EditorUserBuildSettings.selectedBuildTargetGroup = buildTargetGroup;
         EditorBuildSettingsScene[] scenes = EditorBuildSettings.scenes;
         string[] scenePaths = new string[scenes.Length];
         for(int i = 0; i < scenePaths.Length; i++)
@@ -25,8 +25,8 @@ public class BuildScript
         BuildPlayerOptions options = new BuildPlayerOptions
         {
             scenes = scenePaths,
-            locationPathName = "C:/Programs/WebGLBuild",
-            target = BuildTarget.WebGL,
+            locationPathName = "./builds",
+            target = buildTarget,
             options = BuildOptions.None
         };
 
@@ -51,6 +51,18 @@ public class BuildScript
     public static void Build()
     {
         // Build EmbeddedLinux ARM64 Unity player
-        BuildWebGL();
+        DoBuild(BuildTargetGroup.WebGL, BuildTarget.WebGL);
+    }
+
+    public static void BuildWebGL()
+    {
+        // Build EmbeddedLinux ARM64 Unity player
+        DoBuild(BuildTargetGroup.WebGL, BuildTarget.WebGL);
+    }
+
+    public static void BuildWindows()
+    {
+        // Build EmbeddedLinux ARM64 Unity player
+        DoBuild(BuildTargetGroup.Standalone, BuildTarget.StandaloneWindows64);
     }
 }

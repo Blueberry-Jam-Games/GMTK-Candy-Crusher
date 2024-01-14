@@ -18,7 +18,7 @@ GameObject:
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!4 &6223893667729425009
 Transform:
@@ -27,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6223893667729424910}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.12, y: 0, z: 7.06}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6223893667729425010
 MeshFilter:
@@ -93,9 +93,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6223893667729424910}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 4, y: 1, z: 4}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6223893667729424909
@@ -119,6 +127,14 @@ MonoBehaviour:
   attackMaterials: 0
   floorCount: 1
   towerPieces: {fileID: 11400000, guid: 0eec6b9d9237b794db935455c2ce42fc, type: 2}
-  fireRate: 1
+  turret: {fileID: 0}
+  damageDone: 0
   bullet: {fileID: 6590633388225575121, guid: 425de1977c3eb4e2e8eb131ef7019953, type: 3}
   maxTargets: 0
+  sprinklesFireRate: 1
+  sprinklesDamageDone: 5
+  peppermintFireRate: 0.5
+  peppermintDamageDone: 7.5
+  laserFireRate: 2.5
+  laserDamageDone: 15
+  ammo: 0
