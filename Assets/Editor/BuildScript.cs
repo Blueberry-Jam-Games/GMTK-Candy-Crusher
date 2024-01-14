@@ -25,12 +25,11 @@ public class BuildScript
 
         string buildDir = "";
 
-        // TODO it is an issue that Standalone here is Windows specific
-        if (buildTargetGroup == BuildTargetGroup.WebGL)
+        if (buildTarget == BuildTarget.WebGL)
         {
             buildDir = "./builds";
         }
-        else if (buildTargetGroup == BuildTargetGroup.Standalone)
+        else if (buildTarget == BuildTarget.StandaloneWindows64)
         {
             buildDir = "./builds/game.exe";
         }
